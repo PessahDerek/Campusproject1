@@ -1,0 +1,43 @@
+/* button1 styling */
+.btn1 {
+    min-width: 20em;
+    width: 20vw;
+    height: 3em;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.137);
+    margin-left: auto;
+    margin-right: auto;
+}
+/* input 1 styling */
+.inp1 {
+    width: 90%;
+    height: 3em;
+    background-color: transparent;
+    border-bottom: 1px solid black;
+    color: black;
+    outline: transparent;
+}
+/* login form stying */
+.loginform {
+    min-width: 20em;
+    width: 50vw;
+    margin-top: 15vw;
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: 3.5em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(255, 255, 255);
+    padding-top: 2%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.267);
+}
+.loginform div {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 20%;
+    line-height: 3.5em;
+}
