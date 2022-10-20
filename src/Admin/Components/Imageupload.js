@@ -3,14 +3,12 @@ import React, {useState} from 'react'
 const Imageupload = (props) => {
     const [src, setSrc] = useState("")
     const [noText, setTxt] = useState(true)
-    const [val, setVal ] = useState()
 
     const handleUpload = (e)=>{
         try {
             let url = URL.createObjectURL(e.target.files[0]);
             setSrc(url)
-            setVal(e.target.value)
-            //props.getImg(e.target.files[0])
+            props.setImage(e.target.files[0])
             if (e.target.value === null || typeof(e.target.value)==='undefined') {
                 setTxt(true)
                 return

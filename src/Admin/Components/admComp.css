@@ -1,28 +1,37 @@
+/* button 1 */
+.button1 {
+    width: 98%;
+    height: 3em;
+    background-color: #9E54FF;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* admin nav styilng */
 .adminNav {
+    width: 5em;
+    height: 100vh;
     display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 30%;
+    grid-auto-flow: row;
+    grid-template-rows: 10%;
     text-align: left;
-    height: 5em;
     line-height: 5em;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.541);
-    background-image: url(../../Images/Path\ 3.svg), url(../../Images/Path\ 2.svg), linear-gradient(35deg, #9E54FF 5%, #FF6D6D);
+    box-shadow: 12px 0px 24px rgba(0, 0, 0, 0.541);
+    background-color: #181B28;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0vw 5%;
     color: white;
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 2000;
+    
 }
 .adminNav div {
     width: 100%;
-    display: grid;
-    grid-auto-flow: column;
 }
 .adminNav button {
-    width: 10em;
+    width: 90%;
     height: 3em;
     margin-top: auto;
     margin-bottom: auto;
@@ -44,12 +53,17 @@
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.164);
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: 3em;
+    grid-template-rows: 3em max-content;
 }
 .addFoodSeg h2 {
-    background-color: #FF6D6D;
-    height: 9em;
+    background-color: #ff6d6d34;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 400;
 }
+
 
 /* image upload widget */
 .imgUpload {
@@ -86,16 +100,55 @@
 
 /* add food form stying */
 .addFoodForm {
+    width: 100%;
     display: grid;
+    grid-auto-flow: column;
 }
-.addFoodForm input {
+
+.addFoodForm label {
+    height: 2em;
+    line-height: 2em;
+}
+.addFoodForm select {
+    min-width: 10em;
+}
+.addFoodForm input, .addFoodForm select {
     width: 90%;
-    height: 3em;
+    height: 2.5em;
     background-color: white;
-    outline: 2px solid #9E54FF;
+    outline: 0.5px solid #9E54FF;
     color: black;
-    transition: outline 0.5s;
+    transition: outline 0.05s;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
 }
 .addFoodForm input:focus {
     outline: 3px solid #b983ff;
+}
+/* add category styling */
+.addFoodForm section {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: max-content;
+}
+.addFoodForm section * {
+    margin-bottom: 2%;
+}
+.addCategory {
+    display: grid;
+    grid-auto-flow: column;
+    height: 2.5em;
+    width: 90%;
+    gap: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.addCategory button {
+    width: 4em;
+    background-color: #9E54FF;
+    box-shadow: 4px 4px 8px;
+}
+.addCategory button:active {
+    background-color: #b983ff;
 }

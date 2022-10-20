@@ -1,3 +1,8 @@
+/* admin dashboard styling */
+.adminDashboard {
+    display: grid;
+    grid-auto-flow: column;
+}
 /* admin auth styling */
 .adminAuth {
     width: 100%;
@@ -10,12 +15,17 @@
 
 /* admin menu page stying */
 .menuPage {
-    width: 98%;
-    margin-left: auto;
+    width: 90%;
+    margin-left: 6em;
     margin-right: auto;
     display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 40%;
+    grid-auto-flow: row;
     background-color: white;
     margin-top: 0.5em;
+}
+
+@media only screen and (max-width: 900px){
+    .addFoodForm {
+        grid-auto-flow: row !important;
+    }
 }

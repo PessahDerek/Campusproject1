@@ -21,7 +21,7 @@ const Admindash = () => {
     if (!isLoggedin) return <AdminAuth />
 
   return (
-    <div>
+    <div className='adminDashboard'>
       <AdminNav />
       <Routes>
         <Route path='/menu' element={<MenuPage />} />
