@@ -4,13 +4,16 @@ import Imageupload from './Imageupload'
 import AddFlavor from './AddFlavor'
 import AddPrice from './AddPrice'
 import  { generateId, addFoodToMenu, getWidget } from '../../Functions/Func1'
+import Spinner from '../../Componets/Spinner'
 
 const foodCategs = ['Beverage', 'Breakfast', 'Lunch', 'Dessert', 'Dinner']
 
 const Addfood = () => {  
   const [flavWidg, setFlavWidg] = useState([{id: generateId(), elem: AddFlavor}])
   const [priceWidg, setPriceWidg] = useState([{id: generateId(), elem: AddPrice}])
+  const [spin, setSpin] = useState(false)
 
+  const [message, setMessage] = useState("")
   const [image, setImage] = useState("")
   const [food, setFood] = useState({category: "", title: "", unit: ""})
   const [flavors, setFlavors] = useState([""])
@@ -62,13 +65,30 @@ const Addfood = () => {
         category: food.category, 
         title: food.title,
         unit: food.unit,
-        prices: flavNprice
+        flavors: JSON.stringify(flavors),
+        prices: JSON.stringify(flavNprice)
       }
-      let response = await addFoodToMenu(data)
-      console.log(response)
+      setSpin(true)
+      let x = await addFoodToMenu(data)
+      .then(res=>{
+        setMessage(res)
+        setSpin(false)
+      })
+      .catch(err=>{
+        setMessage(err.message)
+        setSpin(false)
+      })
+      console.log(x)
     } 
   }
 
+  const resetForm = () =>{
+    console.log(document.getElementById("addFoodForm").children[0].children[0].children[0]);
+  }
+
+  window.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape') resetForm()
+  })
   const foodcategory = <datalist id="foodcategory">
         {foodCategs.map(category =>
             <option 
@@ -80,8 +100,9 @@ const Addfood = () => {
     </datalist>
   return (
     <div className='addFoodSeg'>
-      <h2>Add Food to Menu</h2>
-      <form className='addFoodForm'>
+    {spin && <Spinner />}
+      <h2>Add Food to Menu: {message}</h2>
+      <form className='addFoodForm' id='addFoodForm'>
         <section>
           <Imageupload 
             value={image}
@@ -148,6 +169,10 @@ const Addfood = () => {
         onClick={add_food}
       >
         Add Food
+      </button>
+      <button className='button1'
+       onClick={resetForm}>
+          New
       </button>
     </div>
   )
