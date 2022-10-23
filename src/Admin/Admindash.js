@@ -4,6 +4,7 @@ import './Admin.css'
 import AdminNav from './Components/AdminNav'
 import { Route, Routes } from 'react-router-dom'
 import MenuPage from './Components/MenuPage'
+import SetupRestaurant from './Components/SetupRestaurant'
 
 const Admindash = () => {
   const [isLoggedin, setIsloggedin] = useState(false)
@@ -25,6 +26,7 @@ const Admindash = () => {
       <AdminNav />
       <Routes>
         <Route path='/menu' element={<MenuPage />} />
+        <Route path='/setuprestaurant' element={<SetupRestaurant />} />
       </Routes>
     </div>
   )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import Navbar from '../Componets/Navbar'
 import Userlogin from './Userlogin'
 
@@ -9,9 +10,16 @@ const MobileLanding = () => {
   return (
     <div className='page' id='phoneLanding'>
       <Navbar />
-      <button className='toScanBtn'>
-        <p>Scan Menu</p>
-      </button>
+      <Routes>
+        <Route path='/' element={
+          <button className='toScanBtn'>
+            <p>Scan Menu</p>
+          </button>
+        } />
+
+        <Route path='/scan'  />
+      </Routes>
+      
     </div>
   )
 }
