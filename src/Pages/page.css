@@ -1,3 +1,19 @@
+/* menu landing page */
+.menuLanding {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: row;
+    gap: 4%;
+}
+
+/* scanpage styling */
+video {
+    margin-top: 5vh;
+    height: 70vh;
+    width: 98%;
+    background-color: #a5a5a5;
+}
+
 /* user login form styling */
 .userLoginPage {
     width: 100%;

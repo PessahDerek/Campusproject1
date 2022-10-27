@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import Navbar from '../Componets/Navbar'
+import QRScanpage from './QRScanpage'
 import Userlogin from './Userlogin'
 
 const MobileLanding = () => {
   const [isLoggedIn, setIsloggedIn] = useState(true)
+  const navigate = useNavigate()
 
   if (!isLoggedIn) return <Userlogin isUser={isLoggedIn} />
   return (
     <div className='page' id='phoneLanding'>
       <Navbar />
       <Routes>
-        <Route path='/' element={
-          <button className='toScanBtn'>
+        <Route exact path='/*' element={
+          <button className='toScanBtn' onClick={()=>navigate('/scan')}>
             <p>Scan Menu</p>
           </button>
         } />
 
-        <Route path='/scan'  />
+        <Route exact path='/scan' element={<QRScanpage />} />
       </Routes>
       
     </div>

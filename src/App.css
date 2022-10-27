@@ -6,6 +6,23 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+.button3 {
+  width: 50vw;
+  height: 3em;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+.searchInp {
+  position: sticky;
+  top: 0;
+  width: 90%;
+  height: 3em;
+  border-radius: 15px;
+  padding-left: 2%;
+  outline: 2px solid rgba(128, 128, 128, 0.418);
+}
 @media only screen and (max-width: 800px){
   
   #phoneLanding .toScanBtn {
@@ -28,5 +45,17 @@ input::-webkit-inner-spin-button {
     font-weight: bolder;
     color: white;
     text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.445);
+  }
+  /* menuLanding */
+  .categList {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .categoryList nav {
+    width: 100%;
+    height: 5em;
+    z-index: 300;
+    background-color: white;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.082);
   }
 }

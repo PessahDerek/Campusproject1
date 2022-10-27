@@ -1,8 +1,110 @@
+/* printpage */
+#displayQRs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#displayQRs div {
+    background-color: white !important;
+    outline: 0.5px solid #9E54FF;
+    color: #9E54FF;
+    width: 200px;
+    height: 200px;
+}
+/* printqrfloatpage */
+.printQrFloatPage {
+    width: 90%;
+    height: 90vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: grid;
+    left: 10%;
+    top: 5%;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.432);
+    position: fixed;
+    background-color: white;
+    z-index: 400;
+}
+.printQrFloatPage .btns {
+    display: grid;
+    grid-auto-flow: column;
+}
+.printQrFloatPage .qrs {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    transform-origin: top;
+    justify-content: space-around;
+}
+/* viewqrprint styling */
+.viewQRprint {
+    width: 150px;
+    height: 180px;
+    display: grid;
+    margin-top: 1%;
+    grid-template-rows: 20% 80%;
+}
+.viewQRprint label {
+    line-height: 200%;
+}
+.viewQRprint img {
+    width: 90%;
+    height: 90%;
+    margin: 5%;
+    object-fit: contain;
+}
+/* order widget styling */
+.order{
+    width: 20em;
+    display: grid;
+    grid-auto-flow: row;
+    padding-bottom: 4%;
+    gap: 2%;
+    text-align: left;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.144);
+}
+.order .response {
+    position: absolute;
+    top: 100%;
+    width: 20em;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.425);
+}
+.order button {
+    margin-left: auto;
+    margin-right: auto;
+}
+.order span {
+    display: grid;
+    grid-auto-flow: column;
+}
+.order span, .order label {
+    padding-left: 5%;
+}
+.order textarea {
+    background-color: white;
+    width: 90%;
+    font-family: inherit;
+    color: black;
+    min-height: 5em;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    outline: 0.5px solid rebeccapurple;
+}
+/* order page styling */
+.ordersPage {
+    width: calc(100vw - 10em);
+    margin-left: 10em;
+}
+
 /* viewtable widget */
 .viewTable {
     min-width: 10em;
     width: 45%;
-    height: 10em;
+    height: max-content;
+    padding-bottom: 2%;
     margin-top: 2%;
     display: grid;
     grid-auto-flow: row;
@@ -10,14 +112,17 @@
     transition: box-shadow 0.5s;
     box-shadow: 0px 0px 12px #181b2823;
 }
+.viewTable label {
+    display: grid;
+    grid-auto-flow: column;
+}
 .viewTable:hover {
     background-color: rgb(252, 252, 252);
     box-shadow: 0px 0px 12px #181b280a;
 }
 .viewTable .btns {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-auto-flow: column;
 }
 .button2 {
     width: 90%;
@@ -48,6 +153,16 @@
 .setupRestPage section {
     display: grid;
 }
+.setupRestPage section:nth-child(2) h1{
+    height: 2.5em;
+    line-height: 2.5em;
+    display: grid;
+    grid-auto-flow: column;
+}
+.setupRestPage section:nth-child(2) h1 button {
+    margin-top: auto;
+    margin-bottom: auto;
+}
 .setupRestPage section .tables {
     height: 90vh;
     overflow-x: hidden;
@@ -62,7 +177,7 @@
     width: 90%;
     grid-auto-rows: 3em;
 }
-.addTableForm input {
+.inp1 {
     width: 97.5%;
     height: 2.5em;
     color: black;
@@ -71,6 +186,12 @@
     outline: 0.5px solid blueviolet;
     margin-left: auto;
     margin-right: auto;
+    border: none;
+    transition: border-radius 0.5s;
+}
+.inp1:focus {
+    /* border-radius: 5px; */
+    outline: 2px solid rgba(137, 43, 226, 0.486);
 }
 /* button 1 */
 .button1 {
@@ -109,9 +230,11 @@
     height: 3em;
     margin-top: auto;
     margin-bottom: auto;
-    border-radius: 10px;
+    margin-left: 5%;
+    outline: 0.5px solid #9E54FF;
     color: #181B28;
-    background-color: #ffffff;
+    color: #ffffff;
+    background-color: transparent;
 }
 .adminNav h1 {
     text-align: left;

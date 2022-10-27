@@ -2,7 +2,7 @@ import axios from "axios";
 import AddFlavor from "../Admin/Components/AddFlavor";
 import AddPrice from "../Admin/Components/AddPrice";
 
-export let onApi = 'http://localhost:4000/api'
+export let onApi = 'https://servymenu.herokuapp.com/api'
 
 let ids = [""]
 
@@ -57,25 +57,33 @@ export async function add_tables(data){
 }
 
 export async function getTables(func){
+    let err = false;
+    let resp;
     await axios.get(onApi +'/gettablelist')
     .then(res=>{
         func(res.data);
-    }, err=>{
-        console.log(err.message)
+    }, error=>{
+        err=true
+        resp = {err: err, message: error.message}
     })
-    .catch(err=>{
-        console.log(err.message)
+    .catch(error=>{
+        console.log("lllll")
+        return {err: err, message: error.message}
     })
-    
+    if (err) return resp
+    return {err: false, message: ""}
 }
 
-export const deleteTable = async(id) =>{
-    await axios.delete(onApi+'/deletetable', id)
-    .then(res=>{
-        console.log(res)
-    })
-    .catch(err=>{
-        console.log(err)
+export async function deleteTable(id){
+    return new Promise((resolve, reject)=>{
+        try {
+            axios.delete(onApi+'/deletetable', id)
+            .then(res=>{
+                return resolve(true)
+            })
+        } catch (error) {
+            return reject(false)
+        }
     })
 }
 
