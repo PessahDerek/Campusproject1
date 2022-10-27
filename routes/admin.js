@@ -1,6 +1,7 @@
 const adminserver = require('express').Router();
 const upload = require('../multer/multer')
 const upload_image = require('../functions/func1');
+const generateQRcode = require('../functions/func1');
 const food = require('../models/food');
 const tables = require('../models/tables');
 
@@ -45,34 +46,57 @@ adminserver.post('/addfood', upload.single('image'), async(req, res)=>{
 
 
 adminserver.post('/registertables', async(req, res)=>{
-    // check if tables are available
-    let tableList = await tables.find()
-    let response, isError = false;
-    let boundary = tableList.length + Number(req.body.count)
+    let qr_code; 
+    let errMsg;
+    let generalError = false
+    let currTables = await tables.find();
+    let constCounter = currTables.length;
+    console.log(constCounter + Number(req.body.count))
     
-    for (let i = tableList.length; i <= boundary; i++){
-        let newTable = new tables({
-            number: i+1,
-            occupied: false
-        })
-        let addedTable = newTable.save();
-        addedTable.then(res=>{
-            response = "Table added"
-        }, err=>{
-            response = err.message
-            isError = true
-        })
-        .catch(err=>{
-            response=err.message;
-            isError = true
-        })
+    for (let i = currTables.length+1; i <= Number(constCounter) + Number(req.body.count); i++){
+        
+        await generateQRcode(i)
+        .then(resp=>{
+            if (resp === false){
+                res.send({err: true, message: "Error generating qr code"});
+                return;
+            }
+            // console.log(res)
+            if (typeof(resp) !== 'undefined'){
+                let newtables = new tables({
+                    qr_code: resp,
+                    number: i,
+                    order: [],
+                })
+                let newt = newtables.save()
+                newt.then(resp=>{
+                    console.log("added...")
+                    // pass
+                }, err=>{
+                    // res.send({err: true, message: err.message})
+                    errMsg = err.message;
+                    generalError = true;
+                    return
+                })
+                .catch(err=>{
+                    // res.send({err: true, message: err.message})
+                    errMsg = err.message;
+                    generalError = true
+                    return;
+                })
+            }
+        });
     }
-    res.send({err: isError, message: response})
+    if (generalError){
+        res.send({err: true, message: errMsg});
+        return
+    }
+    res.send({err:false, message: `${req.body.count} have been added`})
 })
 
 adminserver.get('/gettablelist', async(req, res)=>{
     let response = await tables.find();
-    res.send(response);
+    if (typeof(response) === 'object') res.send(response);
 })
 
 adminserver.delete('/deletetable', async(req, res)=>{

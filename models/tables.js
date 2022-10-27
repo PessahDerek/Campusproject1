@@ -6,10 +6,21 @@ const table = new mongoose.Schema({
         required: true,
         unique: true
     },
+    qr_code: {
+        type: String,
+        required: true
+    },
     occupied: {
         type: Boolean,
         default: false
+    }, 
+    printed: {
+        type: Boolean,
+        default: false
+    },
+    order: {
+        type: []
     }
 })
 
-module.exports = mongoose.model("tables", table)
+module.exports = mongoose.model("tables", table);

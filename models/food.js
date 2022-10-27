@@ -22,6 +22,10 @@ const foods = new mongoose.Schema({
     },
     prices: {
         type: []
+    },
+    rating: {
+        type: Number,
+        default: 0
     }
 })
 

@@ -1,5 +1,6 @@
 const client = require('express').Router();
 const customer = require('../models/customer');
+const foods = require('../models/food')
 
 client.post('/createaccount', async(req, res)=>{
     if (req.body.username && (req.body.password.length > 4) && req.body.phone){
@@ -24,6 +25,11 @@ client.post('/createaccount', async(req, res)=>{
 client.get('/gettable', async(req, res)=>{
     console.log(req.headers)
     res.send({id: 1738})
+})
+
+client.get('/clientfoods', async(req, res)=>{
+    let foodList = await foods.find();
+    res.send(foodList);
 })
 
 

@@ -1,6 +1,7 @@
 const cloudinary = require('cloudinary').v2;
 const stream = require('stream');
 const dotenv = require('dotenv').config();
+const qr = require('qrcode');
 
 module.exports = async function upload_image(image, func){
     let url;
@@ -23,4 +24,23 @@ module.exports = async function upload_image(image, func){
         return {err: true, message: error};
     }
     // await till url is not undefined
+}
+
+module.exports = async function generateQRcode(number){
+    let data = {
+        tableNumber: number
+    }
+
+    try {
+        return new Promise((resolve, reject) => {
+            let strData = JSON.stringify(data);
+            qr.toDataURL(strData, {type: 'terminal'}, function (err, code){
+                if(err) return reject(false);
+                return resolve(code);
+            })
+        })
+    } catch (error) {
+        
+    }
+    
 }
