@@ -1,54 +1,69 @@
 import { combineReducers, configureStore, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-const counterSlice = createSlice({
+let api = 'https://servymenu.herokuapp.com/api'
+localStorage.clear()
+
+const foodSlice = createSlice({
+  name: 'foods',
+  initialState: {foodList: [], categories: []},
+  reducers: {
+    getCategories(state, action){
+      let array = state.categories
+      for (const elem of state.foodList){
+          if (!(elem.category in array)){
+              array.push(elem.category)
+          }
+      }
+      let realList = [...new Set(array)]
+      state.categories = realList
+    },
+    fetchFoodList(state, action){
+      let list;
+      axios.get(api+'/clientfoods')
+      .then(res=>{
+        list = res.data
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+      for(let elem in list) state.foodList.push(elem)
+    },
+    getFood(state, action){
+      for(const elem in state.foodList){
+        if(elem._id === action.payload)return elem;
+      }
+    }
+
+
+  }
+})
+
+const orderSlice = createSlice({
   name: 'counter',
-  initialState: { flavors: ['All Flavors'], prices: [] },
+  initialState: { widgets: [],order: [], prices: [] },
   reducers: {
     // add flavors to list
     addFlavor(state, action) {
       if (!state.flavors.includes(state.payload)) state.flavors.push(action.payload)
     },
-    delFlavor(state, action) {
-      let array = state.flavors.filter(p=>p !== action.payload);
-      state.flavors = array;
+    addToTray(state, action){
+      if (!state.order.includes(state.payload)) state.order.push(action.payload)
+      localStorage.setItem('order', JSON.stringify(state.order))
     },
-    setPrice(state, action) {
-      if (state.prices.length > 0){
-        // correct price
-        for (let element of state.prices){
-          if (element.flavor === action.payload.flavor){
-            let index = state.prices.indexOf(element);
-            state.prices[index] = action.payload;
-            break;
-          }
-        }
-        // its a new price for new flavor
-        
-      } else {
-        return {
-          ...state,
-          prices: [...state.prices, action.payload]
-        }
-      }
-      return {
-          ...state,
-          prices: [...state.prices, action.payload]
-        }
-    },
-    unsetPrice(state, action){
-      let array = state.prices.filter(p=>p.id !== action.payload)
-      return {
-        ...state,
-        prices: array
-      }
+    remFromTray(state, action){
+      let holder = state.order.filter(p=>p.id !== action.payload)
+      state.order = holder
     }
   },
 })
 
-export const { addFlavor, delFlavor, setPrice, unsetPrice } = counterSlice.actions
-let counter_slice = counterSlice.reducer
+export const { initialiseWidget, addFlavor, addToTray, remFromTray } = orderSlice.actions
+export const {fetchFoodList, getCategories} = foodSlice.actions
+let order_slice = orderSlice.reducer
+let food_slice = foodSlice.reducer
 
-const reducer = combineReducers({counter_slice})
+const reducer = combineReducers({order_slice, food_slice})
 const store = configureStore({reducer})
 
 export default store

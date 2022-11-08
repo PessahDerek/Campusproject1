@@ -22,8 +22,7 @@ const QRScanpage = () => {
       videoElement,
       result => {
         hasilScan = result.data
-        console.log(JSON.parse(hasilScan))
-        navigate('/menu')
+        navigate('/roasters', {state: hasilScan})
         setClicked(true)
         stopScan = true
       },

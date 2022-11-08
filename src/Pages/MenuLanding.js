@@ -1,15 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Category from '../Componets/Category'
 import Spinner from '../Componets/Spinner'
 import TopDeal from '../Componets/TopDeal'
 import { generateId, onApi } from '../Functions/Func1'
 
 const MenuLanding = () => {
+    const location = useLocation()
+    const navigate = useNavigate()
     const [spin, setSpin] = useState(false)
     const [foods, setFoods] = useState([])
     const [categories, setCategories] = useState([])
-    
+    const [tableNumber, setTbNumber] = useState("")
+
     useEffect(()=>{
         function setCategs(arr){
             let array = categories
@@ -35,6 +39,11 @@ const MenuLanding = () => {
             .catch(err=>{
                 setSpin(false)
             })
+        }
+        try {
+            //setTbNumber(JSON.parse(location.state).tableNumber)
+        } catch (error) {
+            navigate('/')
         }
         getFoods()
     }, [])

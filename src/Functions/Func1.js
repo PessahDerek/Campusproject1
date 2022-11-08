@@ -44,6 +44,17 @@ export async function addFoodToMenu(data){
         })
 }
 
+export function purgeInputs(flav, size, quant, clicked){
+    localStorage.removeItem(flav)
+    localStorage.removeItem(size)
+    localStorage.removeItem(quant)
+    localStorage.removeItem(clicked)
+}
+
+export async function getFoods(){
+    // pass
+}
+
 export async function add_tables(data){
     await axios.post(onApi+"/registertables", ({count: data}))
     .then((res)=>{
@@ -87,5 +98,9 @@ export async function deleteTable(id){
     })
 }
 
+export function reducer(state, payload){
+    return {quant: payload.payload};
+}
 
-export default (onApi, generateId, getWidget, addFoodToMenu, add_tables, getTables)
+
+export default (onApi, generateId, getWidget, addFoodToMenu, add_tables, getTables, reducer, purgeInputs)

@@ -1,4 +1,69 @@
 /* user */
+/* confOrder Widget styling */
+.confOrder {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: max-content;
+    text-align: left;
+    padding-left: 4%;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.151);
+}
+.confOrder .label {
+    color: #8b33ff;
+}
+.confOrder .comment {
+    width: 100%;
+    outline: transparent;
+    text-align: left;
+    color: black;
+    height: fit-content;
+    font-family: inherit;
+    font-size: inherit;
+}
+.confOrder span {
+    min-height: 2.5em;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 25%;
+}
+.confOrder .buttons {
+    grid-auto-columns: unset;
+}
+
+/* selectfood styling */
+.selectFood {
+    width: 95%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 40%;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);
+}
+.selectFood img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.selectFood .details {
+    text-align: left;
+    display: grid;
+}
+.selectFood .details h3 {
+    color: #8b33ff;
+}
+.selectFood .details .minMax {
+    width: 96%;
+    margin-right: 4%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 /* categories styling */
 .category {
     width: 10em;
@@ -54,35 +119,41 @@
     background-size: cover;
     background-position: 0vw 5%;
 }
-.mainNav button {
+.dropDown .dropBtn {
     width: 3em;
     height: 2em;
-    margin-top: 1.5em;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: 10%;
     background-color: transparent;
     display: grid;
     grid-auto-flow: row;
     z-index: 10;
 }
-.mainNav div button div {
+.dropDown .dropBtn div {
     width: 100%;
     height: 4px;
-    background-color: white;
+    background-color: #8b33ff;
     transition: width 0.5s;
     margin-left: auto;
 }
-.mainNav .items {
+.dropDown .items {
     z-index: 200;
     top: 4em;
     width: 0vw;
     display: none;
-    background-color: white;
+    background-color: #9E54FF;
     position: absolute;
-    margin-left: -40vw;
+    margin-left: -20vw;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.267);
     transition: width 10s, display 0.1s;
 }
-.mainNav .items button {
+.dropDown .items button {
     width: 100%;
+    color: white;
+    font-size: 18px;
+    background-color: transparent;
 }
 /* spinner styling */
 .spinner {
