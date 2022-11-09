@@ -67,15 +67,20 @@ const ConfigureOrder = () => {
 
     useEffect(()=>{
         let fromState = location.state.food
+        
         try {
-            if(Number(total) >= Number(localStorage.getItem(`${fromState._id}`))){
-                localStorage.setItem(`${fromState._id}total`, total)
-                console.log(localStorage.getItem(`${fromState._id}`), 'xx__xx')
-            } 
-            if(Number(total) <= Number(localStorage.getItem(`${fromState._id}`))) setTotal(Number(localStorage.getItem(`${fromState._id}`)))
+            if(localStorage.getItem(`${fromState._id}total`) !== 'null'){
+                setTotal(Number(localStorage.getItem(`${fromState._id}total`)))
+            }
+            
         } catch (error) {
             
         }
+        return ()=>{
+            if(localStorage.getItem(`${fromState._id}total`) !== 'null'){
+                setTotal(Number(localStorage.getItem(`${fromState._id}total`)))
+            }
+        };
     }, [total])
 
     useEffect(()=>{
@@ -98,10 +103,12 @@ const ConfigureOrder = () => {
         if (clicked){
             // delete from list
             // this time value is id and not object
-            let newList = currOrder.filter(p=>p.id !== value)
+            console.log('del', value)
+            let newList = currOrder.filter(p=>p.id !== value.id)
             setThisFoodOrder(newList)
             return
         }
+        console.log('hapa', value)
         let exists = currOrder.filter(p=>p.id === value.id)
         if (exists.length > 0){
             // replace
@@ -147,15 +154,23 @@ const ConfigureOrder = () => {
                     flavors={flavors}
                     food={food}
                     addToList={add_to_list}
-                    setTotal={(val)=>setTotal(total + val)}
+                    setTotal={(val)=>{
+                        setTotal(total + val)
+                        localStorage.setItem(`${food._id}total`, total+val)
+                    }}
                     revert={(pre, post)=>{
                         setTotal(total - pre)
-                        if(Number(post) === 0)return
                         setTotal(post)
+                        localStorage.setItem(`${food._id}total`, post)
                     }}
                     widgetList={widget}
                     add_widg={setWidget}
-                    rem_widg={(val)=>setTotal(total-val)}
+                    setLStotal={()=>localStorage.setItem(`${food._id}total`, total)}
+                    rem_widg={(val)=>{
+                        setTotal(total-val)
+
+                        localStorage.setItem(`${food._id}total`, total-val)
+                    }}
                 />
                 })
             }

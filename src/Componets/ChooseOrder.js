@@ -6,6 +6,7 @@ const ChooseOrder = (props) => {
     let flavors = useRef(props.flavors)
     let food = props.food
     let init_total = useRef(0)
+    const loaded = useRef(0)
     
     const thisId = useRef(generateId())
     const [clicked, setClicked] = useState(false)
@@ -21,43 +22,45 @@ const ChooseOrder = (props) => {
             flavor: userFlav,
             size: `${userSize}${food.unit}`,
             quantity: quant,
-            cost: init_total.current
+            cost: init_total.current !== 0 ? init_total.current : getTotal()
         }
-        if(clicked === 'null') return props.addToList(true, thisFood)
-        props.addToList(clicked, thisFood)
+
+        // if(clicked !== 'null'){
+        //     console.log(clicked) 
+        //     return props.addToList(clicked, thisFood.id)
+        // }
+        return props.addToList(clicked, thisFood)
     }
 
     useEffect(()=>{
-        try {
-            localStorage.getItem(`${food._id}total`)
-        } catch (error) {
-            
-        }
+        if(localStorage.getItem(`${props.id}total`) !== 'null')init_total.current = Number(localStorage.getItem(`${props.id}total`))
     }, [])
 
     useLayoutEffect(()=>{
         try {
             if(localStorage.getItem(`inp${props.id}`)) document.getElementById(`inp${props.id}`).value = localStorage.getItem(`inp${props.id}`)
             setQuant(0 || localStorage.getItem(`inp${props.id}`))
-
-            if(typeof(localStorage.getItem(`${props.id}Clicked`)) !== 'undefined'){
-                setClicked(JSON.parse(localStorage.getItem(`${props.id}Clicked`)))
-                if(JSON.parse(localStorage.getItem(`${props.id}Clicked`)))add_to_list()
-            } 
+ 
             if(localStorage.getItem(`${props.id}flav`) !== null){
                 setFlav(localStorage.getItem(`${props.id}flav`))
             }
             if(localStorage.getItem(`${props.id}userSize`) !== null)setUserSize(localStorage.getItem(`${props.id}userSize`))
 
-            if(clicked){
-                //add_to_list()
+            if(typeof(localStorage.getItem(`${props.id}Clicked`)) !== 'undefined'){
+                setClicked(JSON.parse(localStorage.getItem(`${props.id}Clicked`)))
+                if(JSON.parse(localStorage.getItem(`${props.id}Clicked`)))return add_to_list()
             }
         } catch (error) {
             
         }
     }, [clicked, props.id])
    
-
+    function getTotal(){
+        let price = food.prices
+        let use = price.filter(elem=>userFlav.includes(elem.flavour) && userSize.includes(String(elem.unitSize)))
+        let quantInput = document.getElementById(`inp${props.id}`)
+        return (Number(quantInput.value) * Number(use[0].price))
+    }
     function addWidget(){
         if (widgetList.length < 2){
            setClicked(false) 
@@ -77,7 +80,7 @@ const ChooseOrder = (props) => {
         if (widgetList.length <= 1) return 
         props.add_widg(widgetList.filter(p=>p.id !== props.id))
         // affect the total
-        props.rem_widg(init_total.current)
+        init_total.current !== 0 ? props.rem_widg(init_total.current): props.rem_widg(getTotal())
         setClicked(false)
         add_to_list()
 
@@ -94,8 +97,9 @@ const ChooseOrder = (props) => {
 
         // correct on delete
         if (Number(e.target.value) < init_total.current){
-            props.revert(init_total.current, Number(quantInput.value) * use[0].price)
-            init_total.current = Number(quantInput.value) * use[0].price
+            props.revert(init_total.current, Number(quantInput.value) * Number(use[0].price))
+            //console.log(quantInput.value)
+            init_total.current = Number(quantInput.value) * Number(use[0].price)
             return
         }
 
@@ -133,6 +137,7 @@ const ChooseOrder = (props) => {
         <input 
             placeholder='Quantity'
             id={`inp${props.id}`}
+            readOnly={clicked}
             onChange={e=>{
                 set_total(e)
                 setQuant(e.target.value)

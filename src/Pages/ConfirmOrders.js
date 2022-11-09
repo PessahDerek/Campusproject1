@@ -27,6 +27,9 @@ const ConfirmOrders = () => {
           />)
         }
       </div>
+      <button className='button1' id='orderBtn'>
+        Place order
+      </button>
     </div>
   )
 }

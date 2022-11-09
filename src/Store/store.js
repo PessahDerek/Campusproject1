@@ -48,6 +48,7 @@ const orderSlice = createSlice({
       if (!state.flavors.includes(state.payload)) state.flavors.push(action.payload)
     },
     addToTray(state, action){
+      console.log(!state.order.includes(state.payload))
       if (!state.order.includes(state.payload)) state.order.push(action.payload)
       localStorage.setItem('order', JSON.stringify(state.order))
     },

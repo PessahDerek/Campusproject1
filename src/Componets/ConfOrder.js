@@ -10,7 +10,7 @@ const ConfOrder = (props) => {
   
   return (
     <div className='confOrder'>
-      <span>
+      <span className='buttons'>
         <h3>Food: {food[0].food}</h3>
       </span>
       <span>

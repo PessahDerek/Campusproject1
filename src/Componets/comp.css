@@ -119,6 +119,10 @@
     background-size: cover;
     background-position: 0vw 5%;
 }
+.dropDown {
+    margin-top: auto;
+    margin-bottom: auto;
+}
 .dropDown .dropBtn {
     width: 3em;
     height: 2em;
@@ -134,7 +138,7 @@
 .dropDown .dropBtn div {
     width: 100%;
     height: 4px;
-    background-color: #8b33ff;
+    background-color: #ffffff;
     transition: width 0.5s;
     margin-left: auto;
 }
@@ -145,7 +149,7 @@
     display: none;
     background-color: #9E54FF;
     position: absolute;
-    margin-left: -20vw;
+    margin-left: -270%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.267);
     transition: width 10s, display 0.1s;
 }
