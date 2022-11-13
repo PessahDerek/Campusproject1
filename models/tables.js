@@ -18,7 +18,7 @@ const table = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    order: {
+    orders: {
         type: []
     }
 })
