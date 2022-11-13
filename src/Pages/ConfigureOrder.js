@@ -4,7 +4,7 @@ import './page.css'
 import { generateId, reducer, totalReducer } from '../Functions/Func1'
 import ListPrices from '../Componets/ListPrices'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToTray, initialiseWidget, remFromTray } from '../Store/store'
+import { addToTray, initialiseWidget, remFromOrder, remFromTray } from '../Store/store'
 import ChooseOrder from '../Componets/ChooseOrder'
 
 
@@ -103,18 +103,15 @@ const ConfigureOrder = () => {
         if (clicked){
             // delete from list
             // this time value is id and not object
-            console.log('del', value)
             let newList = currOrder.filter(p=>p.id !== value.id)
             setThisFoodOrder(newList)
-            return
+            return dispatch(remFromOrder({order_id: food._id, specific_id: value.id}))
         }
-        console.log('hapa', value)
         let exists = currOrder.filter(p=>p.id === value.id)
         if (exists.length > 0){
             // replace
             currOrder[currOrder.indexOf(exists[0])] = value
             setThisFoodOrder(currOrder)
-            return
         }else{
             // add new
             setThisFoodOrder(p=>([...p, value]))
@@ -159,9 +156,10 @@ const ConfigureOrder = () => {
                         localStorage.setItem(`${food._id}total`, total+val)
                     }}
                     revert={(pre, post)=>{
-                        setTotal(total - pre)
-                        setTotal(post)
-                        localStorage.setItem(`${food._id}total`, post)
+                        let tot = total - pre
+                        setTotal(tot)
+                        //setTotal(post)
+                        localStorage.setItem(`${food._id}total`, tot)
                     }}
                     widgetList={widget}
                     add_widg={setWidget}
@@ -171,6 +169,13 @@ const ConfigureOrder = () => {
 
                         localStorage.setItem(`${food._id}total`, total-val)
                     }}
+                    autoClick={(id)=>{
+                        if(clicked){
+                            add_to_list(true, {id: id})
+                            document.getElementById("add_rem_tray_btn").click()
+                        }
+                    }
+                    }
                 />
                 })
             }
@@ -186,6 +191,7 @@ const ConfigureOrder = () => {
         />
         <button className='button1' 
             type='button'
+            id='add_rem_tray_btn'
             onClick={()=>{
                 clicked ? rem_frm_tray() : send_to_list({ id: food._id, foods: thisFoodOrder, comment: userComment})
             }

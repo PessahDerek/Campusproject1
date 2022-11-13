@@ -1,3 +1,4 @@
+ 
 /* view tray/confirm order page */
 .confirmOrderPage {
     min-height: 100vh;
@@ -135,6 +136,9 @@ video {
     grid-auto-rows: 3em;
 }
 .userLoginPage img {
+    width: 35%;
+    height: 8.5em;
+    object-fit: fill;
     margin-left: auto;
     margin-right: auto;
 }

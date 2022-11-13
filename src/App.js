@@ -10,6 +10,9 @@ import ConfigureOrder from './Pages/ConfigureOrder';
 import ConfirmOrders from './Pages/ConfirmOrders';
 import TrayBtn from './Componets/TrayBtn';
 import Attention from './Componets/Attention';
+import QRScanpage from './Pages/QRScanpage';
+import MobileLanding from './Pages/MobileLanding';
+import ViewOrders from './Pages/ViewOrders';
 
 function App() {
   return (
@@ -18,12 +21,14 @@ function App() {
       <Attention />
       <Routes>
         <Route exact path='/*' element={<Landing />} />
+        <Route exact path='/scanpage/*' element={<MobileLanding />} />
         <Route exact path='/admin/*' element={<Admindash />} />
         <Route exact path='/print' element={<Printpage />} />
         <Route exact path='/roasters/*' element={<MenuLanding />} />
         <Route exact path='/roasters/viewcategory' element={<CategoryList />} />
         <Route exact path='/roasters/setuporder' element={<ConfigureOrder />} />
         <Route exact path='/roasters/confirmorder' element={<ConfirmOrders />} />
+        <Route exact path='/yourorders' element={<ViewOrders />} />
       </Routes>
     </div>
   );

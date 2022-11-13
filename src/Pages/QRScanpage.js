@@ -2,6 +2,7 @@ import QrScanner from 'qr-scanner'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import adapter from 'webrtc-adapter'
+import Navbar from '../Componets/Navbar'
 import './page.css'
 
 let stopScan = false

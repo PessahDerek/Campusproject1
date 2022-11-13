@@ -25,11 +25,7 @@ const ChooseOrder = (props) => {
             cost: init_total.current !== 0 ? init_total.current : getTotal()
         }
 
-        // if(clicked !== 'null'){
-        //     console.log(clicked) 
-        //     return props.addToList(clicked, thisFood.id)
-        // }
-        return props.addToList(clicked, thisFood)
+        props.addToList(!clicked, thisFood)
     }
 
     useEffect(()=>{
@@ -53,7 +49,7 @@ const ChooseOrder = (props) => {
         } catch (error) {
             
         }
-    }, [clicked, props.id])
+    }, [add_to_list, clicked, props.id])
    
     function getTotal(){
         let price = food.prices
@@ -82,7 +78,8 @@ const ChooseOrder = (props) => {
         // affect the total
         init_total.current !== 0 ? props.rem_widg(init_total.current): props.rem_widg(getTotal())
         setClicked(false)
-        add_to_list()
+        props.autoClick(thisId.current)
+        //add_to_list()
 
         localStorage.setItem(`${props.id}Clicked`, JSON.stringify(false))
         purgeInputs(`${props.id}flav`, `${props.id}userSize`, `inp${props.id}`, `${props.id}Clicked`)

@@ -3,6 +3,7 @@ import AddFlavor from "../Admin/Components/AddFlavor";
 import AddPrice from "../Admin/Components/AddPrice";
 
 export let onApi = 'https://servymenu.herokuapp.com/api'
+//export let onApi = "http://localhost:4000/api"
 
 let ids = [""]
 

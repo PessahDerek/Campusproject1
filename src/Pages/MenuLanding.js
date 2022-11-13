@@ -1,12 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Category from '../Componets/Category'
 import Spinner from '../Componets/Spinner'
 import TopDeal from '../Componets/TopDeal'
 import { generateId, onApi } from '../Functions/Func1'
+import { setTableNumber } from '../Store/store'
 
 const MenuLanding = () => {
+    let dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
     const [spin, setSpin] = useState(false)
@@ -42,6 +45,7 @@ const MenuLanding = () => {
         }
         try {
             //setTbNumber(JSON.parse(location.state).tableNumber)
+            dispatch(setTableNumber(JSON.parse(location.state).tableNumber))
         } catch (error) {
             navigate('/')
         }

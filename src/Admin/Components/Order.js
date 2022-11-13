@@ -4,6 +4,7 @@ import "./admComp.css"
 const Order = (props) => {
     const [reason, setReason]=useState("")
     const [response, setResp]=useState(false)
+    
   return (
     <div className='order'>
       <span>Table: {props.number}</span>
