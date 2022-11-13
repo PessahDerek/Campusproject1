@@ -4,7 +4,37 @@ const upload_image = require('../functions/func1');
 const generateQRcode = require('../functions/func1');
 const food = require('../models/food');
 const tables = require('../models/tables');
+const Admin = require('../models/Admin');
 
+adminserver.post('/admincreateaccount', async(req, res)=>{
+    if(req.body.userName && req.body.password && req.body.phone){
+        let newUser = new Admin({
+            userName: req.body.userName,
+            phone: req.body.phone,
+            password: req.body.password
+        })
+        await newUser.save()
+        .then(res=>{
+            return res.send({err: false, adminId: res._id})
+        }, err=>{
+            return res.send({err: true, message: err.message})
+        })
+        .catch(err=>{
+            return res.send({err: true, message: err.message})
+        })
+    }
+    return res.send({err: true, message: "Empty Input"});
+})
+
+adminserver.post('/adminsignin', async(req, res)=>{
+    if(req.body.userName && req.body.password){
+        let isAdmin = await Admin.findOne({userName: req.body.userName})
+        if(isAdmin === null) return res.send({err: true, message: 'Account does not exist'})
+        if(isAdmin.password !== req.body.password)return res.send({err: true, message: "Mismatching Credentials"})
+        return res.send({err: false, adminId: isAdmin._id})
+    }
+    return res.send({err: true, message: "Empty Input"})
+})
 
 adminserver.post('/addfood', upload.single('image'), async(req, res)=>{
     let image = req.file;
