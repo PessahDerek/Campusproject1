@@ -5,9 +5,6 @@ const foods = new mongoose.Schema({
         type: String,
         required: true
     },
-    unit: {
-        type: String
-    },
     category: {
         type: String,
         required: true
@@ -17,11 +14,11 @@ const foods = new mongoose.Schema({
         required: true,
         unique: true
     },
-    flavors: {
-        type: []
+    description: {
+        type: String,
     },
-    prices: {
-        type: []
+    price: {
+        type: Number
     },
     rating: {
         type: Number,

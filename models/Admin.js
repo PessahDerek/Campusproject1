@@ -3,11 +3,13 @@ const mongoose = require('mongoose')
 let newAdmin = new mongoose.Schema({
     userName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     phone: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,

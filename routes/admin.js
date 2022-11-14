@@ -6,29 +6,36 @@ const food = require('../models/food');
 const tables = require('../models/tables');
 const Admin = require('../models/Admin');
 
+// define cloudinary
+const cloudinary = require('cloudinary').v2;
+const stream = require('stream');
+const dotenv = require('dotenv').config();
+
 adminserver.post('/admincreateaccount', async(req, res)=>{
-    if(req.body.userName && req.body.password && req.body.phone){
+    if(req.body.username && req.body.password && req.body.phone){
         let newUser = new Admin({
-            userName: req.body.userName,
+            userName: req.body.username,
             phone: req.body.phone,
             password: req.body.password
         })
         await newUser.save()
-        .then(res=>{
-            return res.send({err: false, adminId: res._id})
+        .then(resp=>{
+            return res.send({err: false, adminId: resp._id})
         }, err=>{
             return res.send({err: true, message: err.message})
         })
         .catch(err=>{
             return res.send({err: true, message: err.message})
         })
+        return
     }
     return res.send({err: true, message: "Empty Input"});
 })
 
 adminserver.post('/adminsignin', async(req, res)=>{
-    if(req.body.userName && req.body.password){
-        let isAdmin = await Admin.findOne({userName: req.body.userName})
+    console.log(req.body)
+    if(req.body.username && req.body.password){
+        let isAdmin = await Admin.findOne({userName: req.body.username})
         if(isAdmin === null) return res.send({err: true, message: 'Account does not exist'})
         if(isAdmin.password !== req.body.password)return res.send({err: true, message: "Mismatching Credentials"})
         return res.send({err: false, adminId: isAdmin._id})
@@ -40,38 +47,50 @@ adminserver.post('/addfood', upload.single('image'), async(req, res)=>{
     let image = req.file;
     let body = req.body;
 
+    let url;
+    const callback = (err, resp) =>{
+        console.log('err')
+        if (err){
+            console.log(err)
+            return res.send({err: true, message: err.message}) 
+        }
 
-    async function reset_resp(url){
-        if (!url.err){
-            console.log("saving to db")
-            let newFood = new food({
-                image: url,
-                category: body.category,
-                unit: body.unit,
-                title: body.title,
-                flavors: JSON.parse(body.flavors),
-                prices: JSON.parse(body.prices)
+        url = resp.url;
+        let newFood = new food({
+            image: url,
+            category: body.category,
+            description: body.description,
+            title: body.title,
+            prices: body.price
+        })
+        
+        try {
+            let save = newFood.save()
+            save.then(resp =>{
+                return res.send({err: false, message: `${body.title} has been added`})
+            }, err=>{
+                return res.send({err: true, message: `${err.message}`})
             })
-            
-            try {
-                await newFood.save()
-                .then(res =>{
-                    console.log("no err in saving")
-                    res.send({err: false, message: `${body.title} has been added`})
-                    return 0
-                }, err=>{
-                    res.send({err: true, message: `${err.message}`})
-                })
-            } catch (error) {
-                res.send({err: true, message: `${error.message}`})
-            }
-        }else{
-            console.log("err...")
-            res.send(url)
+            .catch(err=>{
+                console.log('major: ', err.message)
+                return res.send({err: true, message: err.message})
+            })
+        } catch (error) {
+            return res.send({err: true, message: `${error.message}`})
         }
     }
 
-    let resp = await upload_image(image, reset_resp)
+    console.log("xxxxxx")
+    try {
+        let x = cloudinary.uploader.upload_stream({
+            resource_type: "image", 
+            public_id: `${Date.now() + image.originalname}`
+        }, callback).end(image.buffer)
+    } catch (error) {
+        console.log(error.message)
+        return res.send({err: true, message: error.message});
+    }
+
 })
 
 

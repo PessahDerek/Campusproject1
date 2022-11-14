@@ -5,12 +5,12 @@ const qr = require('qrcode');
 
 module.exports = async function upload_image(image, func){
     let url;
-    const callback = async(err, resp) =>{
+    const callback = (err, resp) =>{
         if (err){
             console.log(err)
             return {err: true, message: err}
         }
-        console.log('here')
+
         url = resp.url;
         func(url)
     }
