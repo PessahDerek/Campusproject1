@@ -12,6 +12,9 @@ const newOrder = new mongoose.Schema({
     orders: {
         type: [],
         required: true
+    },
+    customerTotal: {
+        type: Number
     }
 })
 

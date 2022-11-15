@@ -61,7 +61,7 @@ adminserver.post('/addfood', upload.single('image'), async(req, res)=>{
             category: body.category,
             description: body.description,
             title: body.title,
-            prices: body.price
+            price: body.price
         })
         
         try {
@@ -72,7 +72,6 @@ adminserver.post('/addfood', upload.single('image'), async(req, res)=>{
                 return res.send({err: true, message: `${err.message}`})
             })
             .catch(err=>{
-                console.log('major: ', err.message)
                 return res.send({err: true, message: err.message})
             })
         } catch (error) {
@@ -80,7 +79,6 @@ adminserver.post('/addfood', upload.single('image'), async(req, res)=>{
         }
     }
 
-    console.log("xxxxxx")
     try {
         let x = cloudinary.uploader.upload_stream({
             resource_type: "image", 
@@ -95,7 +93,7 @@ adminserver.post('/addfood', upload.single('image'), async(req, res)=>{
 
 
 adminserver.post('/registertables', async(req, res)=>{
-    let qr_code; 
+    //let qr_code; 
     let errMsg;
     let generalError = false
     let currTables = await tables.find();
@@ -158,6 +156,17 @@ adminserver.delete('/deletetable', async(req, res)=>{
         }
         res.send("Could not delete table ", param)
     })
+})
+
+adminserver.post('/editfood', async(req, res)=>{
+    let edit = req.body
+    food.updateOne({_id: edit.id}, {title: edit.title, description: edit.description, price: edit.price}, (err, docs)=>{
+        if(err){
+            return res.send({err: true, message: 'Could not Edit'})
+        }
+        console.log(docs)
+        return res.send({err: false, message: "Edit Successfully"})
+    } )
 })
 
 module.exports = adminserver

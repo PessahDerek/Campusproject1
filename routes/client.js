@@ -55,7 +55,8 @@ client.post('/placeorder', async(req, res)=>{
     let newOrder = new orders({
         customer: request.userId,
         tableNumber: 14,
-        orders: request.orders
+        orders: request.orders,
+        customerTotal: request.total
     })
     try {
         await newOrder.save()
@@ -65,6 +66,7 @@ client.post('/placeorder', async(req, res)=>{
                 if(err){
                     return console.log("xxx", err.message)
                 }
+                console.log("h1h1h1")
                 return res.send({err: false, message: "Order Sent, Wait to be served", orderId: resp._id})
             })
             
@@ -78,7 +80,7 @@ client.post('/placeorder', async(req, res)=>{
             return res.send({err: true, message: "Order Could not be sent, we'll send a waiter"})
         })
     } catch (error) {
-        
+        res.send({err: true, message: error.message})
     }
 })
 
