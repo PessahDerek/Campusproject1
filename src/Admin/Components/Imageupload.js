@@ -8,7 +8,7 @@ const Imageupload = (props) => {
         try {
             let url = URL.createObjectURL(e.target.files[0]);
             setSrc(url)
-            props.setImage(e.target.files[0])
+            props.setImage(p=>({...p, image: e.target.files[0]}))
             if (e.target.value === null || typeof(e.target.value)==='undefined') {
                 setTxt(true)
                 return
@@ -23,7 +23,7 @@ const Imageupload = (props) => {
     <div className='imgUpload' >
         {noText && <h5>upload image</h5>  }
         {!noText && <img src={src} alt="" />}
-        <input onChange={handleUpload} type='file' accept='image/png' multiple={false} />
+        <input onChange={handleUpload} type='file' accept='image/*' multiple={false} />
     </div>
   )
 }

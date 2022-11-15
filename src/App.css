@@ -56,7 +56,35 @@ nav {
   top: 30%;
   background: url('./Images/notificationOutlineWhite.png') #FF9E0D;
 }
-
+.attention {
+  position: absolute;
+  z-index: 300;
+  top: 30vh;
+  left: 0vw;
+}
+.attention .details {
+  margin-left: -100vw;
+  width: 80vw;
+  opacity: 0;
+  display: grid;
+  grid-auto-flow: row;
+  text-align: left;
+  row-gap: 4%;
+  transition: left 0.5s, opacity 1s;
+}
+.attention textarea {
+  height: 10em;
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: inherit;
+  font-size: 18px;
+  outline: transparent;
+}
+.simpleblack {
+  background-color: black;
+  color: white
+}
 /* popup styling */
 .popup {
   width: 80%;
@@ -109,6 +137,8 @@ nav {
   .categList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+    
   }
   .categoryList nav {
     width: 100%;

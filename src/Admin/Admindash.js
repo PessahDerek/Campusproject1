@@ -9,19 +9,21 @@ import OrdersPage from './Components/OrdersPage'
 import Printpage from './Components/Printpage'
 
 const Admindash = () => {
-  const [isLoggedin, setIsloggedin] = useState(false)
+  const [isLoggedin, setIsloggedin] = useState("")
 
     useEffect(()=>{
       try {
-        setIsloggedin(localStorage.getItem("isLogged"))
+        setIsloggedin(localStorage.getItem("currentAdmin"))
       } catch (error) {
-        setIsloggedin(false)
+        setIsloggedin("")
       }
     }, [])
 
 
     // approve login first before proceeding
-    if (!isLoggedin) return <AdminAuth />
+    if (!isLoggedin) return <AdminAuth 
+      setLoggedIn={setIsloggedin}
+    />
 
   return (
     <div className='adminDashboard'>

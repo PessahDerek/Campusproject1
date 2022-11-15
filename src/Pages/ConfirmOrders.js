@@ -16,9 +16,16 @@ const ConfirmOrders = () => {
   const [spin, setSpin] = useState(false)
   const [message, setMessage] = useState("")
   let oList = useSelector(state=>state.order_slice.order)
+  const [total, setTotal] = useState(0)
 
   useEffect(()=>{
     setOrderList(oList)
+    let tot = 0
+    oList.forEach(p=>{
+      tot+=p.food.price
+    })
+    console.log(oList[0])
+    setTotal(tot)
   }, [oList])
 
 
@@ -33,13 +40,14 @@ const ConfirmOrders = () => {
       orders: orderList
     }
     setSpin(true)
+
     await axios.post(onApi+'/placeorder', sendObject)
     .then(res=>{
-      if(res.body.err){
-        return setMessage(res.body.message)
+      if(res.data.err){
+        return setMessage(res.data.message)
       }
-      dispatch(addPendingOrder(res.body.orderId))
-      setMessage(res.message)
+      dispatch(addPendingOrder(res.data.orderId))
+      setMessage(res.data.message)
       setTimeout(() => {
         navigate('/yourorders')
       }, 4000);
@@ -61,14 +69,15 @@ const ConfirmOrders = () => {
       {spin && <Spinner />}
       <nav className='nav3'>
         <h1>Your Tray</h1>
+        <h1>Total: Ksh.{total}</h1>
       </nav>
       <div className='listOrders'>
         {orderList.length < 1 && <h3 >You haven't added any food to your tray</h3>}
         
-        {orderList.map(order=><ConfOrder 
+        {oList.map(order=><ConfOrder 
             key={order.id}
             id={order.id}
-            food={order.foods}
+            food={order}
             comment={order.comment}
           />)
         }

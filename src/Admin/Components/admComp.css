@@ -95,8 +95,10 @@
 }
 /* order page styling */
 .ordersPage {
-    width: calc(100vw - 10em);
-    margin-left: 10em;
+    width: calc(100vw - 6em);
+    margin-left: 6em;
+    margin-top: 1%;
+    outline: 2px solid red;
 }
 
 /* viewtable widget */
@@ -241,27 +243,94 @@
     text-align: left;
     padding-left: 10%;
 }
-
-/* add food segment styling */
-.addFoodSeg {
-    width: 98%;
-    margin-left: 1%;
-    min-height: 85vh;
-    border-radius: 15px;
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.164);
+/* view food styling */
+.viewFood {
+    width: 20em;
+    height: max-content;
+    padding-bottom: 2%;
+    display: grid;
+    margin-top: 2%;
+    grid-auto-flow: column;
+    grid-template-columns: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.11);
+}
+.viewFood img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.viewFood div {
+    width: 90%;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: 3em max-content;
 }
-.addFoodSeg h2 {
-    background-color: #ff6d6d34;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 400;
+.viewFood div input {
+    height: 25px;
+    outline: transparent;
+    color: #181B28;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #e8e8eb;
+}
+.viewFood textarea {
+    background-color: white;
+    color: #181B28;
+    min-height: 5em;
+    resize: none;
+    font-family: inherit;
+    outline: transparent;
+}
+.viewFood #header {
+    max-width: 110px;
+    outline: transparent;
+    background-color: white !important;
+    resize: none;
+    font-size: larger;
+}
+.viewFood div span {
+    height: 2em;
+    line-height: 2em;
+    display: grid;
+    grid-auto-flow: column;
+}
+.viewFood div label {
+    height: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: white;
+    color: #181B28;
 }
 
+/* add food segment styling */
+.addFood {
+    height: 95vh;
+    overflow-y: hidden;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 40%;
+}
+.addFood #seeMenu {
+    overflow-y: auto;
+}
+.addFood #seeMenu nav {
+    height: 3em;
+    line-height: 3em;
+    border-bottom: 2px solid #9E54FF;
+    position: sticky;
+    top: 0;
+    margin-bottom: 2%;
+    background-color: white;
+}
+.addFood #seeMenu .foodList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 /* image upload widget */
 .imgUpload {
@@ -273,7 +342,10 @@
 }
 .imgUpload h5 {
     z-index: 0;
+    height: 25vh;
+    line-height: 25vh;
     margin-top: auto;
+    outline: 0.1px solid #181B28;
 }
 .imgUpload img {
     width: 100%;
@@ -287,12 +359,12 @@
 .imgUpload input {
     opacity: 0;
     width: 100%;
-    height: 100%;
+    height: 25vh !important;
+    outline: transparent;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 200;
-    outline: none;
     border: none !important;
 }
 
@@ -300,9 +372,23 @@
 .addFoodForm {
     width: 100%;
     display: grid;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
+    row-gap: 2%;
+    grid-auto-rows: max-content;
 }
-
+.addFoodForm textarea {
+    width: 86%;
+    height: 10em;
+    font-family: inherit;
+    background-color: white;
+    padding: 2%;
+    color: #181B28;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 2px solid #9E54FF;
+    border-bottom: 0.1px solid #9E54FF;
+    outline: transparent;
+}
 .addFoodForm label {
     height: 2em;
     line-height: 2em;
@@ -314,39 +400,13 @@
     width: 90%;
     height: 2.5em;
     background-color: white;
-    outline: 0.5px solid #9E54FF;
+    outline: transparent;
+    border-bottom: 2px solid #9E54FF;
     color: black;
-    transition: outline 0.05s;
+    transition: border-bottom 0.05s;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 10px;
 }
 .addFoodForm input:focus {
-    outline: 3px solid #b983ff;
-}
-/* add category styling */
-.addFoodForm section {
-    display: grid;
-    grid-auto-flow: row;
-    grid-auto-rows: max-content;
-}
-.addFoodForm section * {
-    margin-bottom: 2%;
-}
-.addCategory {
-    display: grid;
-    grid-auto-flow: column;
-    height: 2.5em;
-    width: 90%;
-    gap: 2%;
-    margin-left: auto;
-    margin-right: auto;
-}
-.addCategory button {
-    width: 4em;
-    background-color: #9E54FF;
-    box-shadow: 4px 4px 8px;
-}
-.addCategory button:active {
-    background-color: #b983ff;
+    border-bottom: 3px solid #b983ff;
 }

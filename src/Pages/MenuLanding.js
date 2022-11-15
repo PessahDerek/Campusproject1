@@ -44,13 +44,13 @@ const MenuLanding = () => {
             })
         }
         try {
-            //setTbNumber(JSON.parse(location.state).tableNumber)
+            setTbNumber(JSON.parse(location.state).tableNumber)
             dispatch(setTableNumber(JSON.parse(location.state).tableNumber))
         } catch (error) {
-            navigate('/')
+            //navigate('/')
         }
         getFoods()
-    }, [])
+    }, [categories, dispatch])
 
     if (foods.length < 1){
         return (

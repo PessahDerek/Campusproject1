@@ -1,43 +1,38 @@
-import React, {useState} from 'react'
+import axios from 'axios'
+import React, {useEffect, useState} from 'react'
+import { onApi } from '../../Functions/Func1'
 import "./admComp.css"
 
 const Order = (props) => {
     const [reason, setReason]=useState("")
     const [response, setResp]=useState(false)
-    
+    const [customer, setCustomer] = useState({username: "Doe"})
+
+    useEffect(()=>{
+      async function getusers(){
+        await axios.post(onApi+'/finduser', {userId: props.userId})
+        .then(res=>{
+          if(res.data.err){
+            // ignore
+          }
+          setCustomer(res.data.user)
+        }, err=>setCustomer(p=>({...p, username: err.message})))
+        .catch(err=>{
+          // ignore
+        })
+      }
+      
+    })
   return (
     <div className='order'>
-      <span>Table: {props.number}</span>
-      <label>Food</label>
-      <div className='foods'>
-        {/* list foods */}
-
-      </div>
-      <textarea 
-        value={props.extras}
-        readOnly
-      />
-        <button className="button2">
-            Process
-        </button>
-        <button className="button2" onClick={()=>setResp(!response)}>
-            Respond
-        </button>
-        {response && <div className='response'>
-            <textarea 
-                value={reason}
-                onChange={e=>setReason(e.target.value)}
-            />
-            <div className='btns'>
-                <button className="button1">
-                    Send
-                </button>
-                <button className="button1" onClick={()=>setResp(false)}>
-                    Cancel
-                </button>
-            </div>
-            
-        </div>}
+      <span>
+        <h5>Table number: {props.tbNumber}</h5>
+        <h5>Customer: {customer.username}</h5>
+      </span>
+      {props.orders.map(order=><span key={order.id}>
+        <h6>{order.title}</h6>
+        <h6>{}</h6>
+      </span>)}
     </div>
   )
 }

@@ -105,6 +105,9 @@
     grid-auto-flow: row;
     gap: 4%;
 }
+.menuLanding .categlist {
+    
+}
 
 /* scanpage styling */
 video {
