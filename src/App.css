@@ -12,7 +12,7 @@ nav {
 
 .button3 {
   width: 50vw;
-  height: 3em;
+  height: 2.5em;
   border-radius: 5px;
   background-color: transparent;
   color: white;
@@ -82,6 +82,10 @@ nav {
   outline: transparent;
 }
 .simpleblack {
+  width: 90%;
+  height: 2.5em;
+  margin-left: auto;
+  margin-right: auto;
   background-color: black;
   color: white
 }
@@ -108,6 +112,89 @@ nav {
   font-size: 17px;
   margin-left: auto;
   margin-right: auto;
+}
+.button4{
+    width: 35%;
+    color: white;
+    height: 2.5em;
+    border-radius: 30px;
+    background-color: #6f23d3;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.192);
+}
+.button4:active{
+  background-color: #862aff;
+}
+.errorDiv {
+  height: 100vh;
+  display: grid;
+  grid-auto-flow: row;
+  align-content: center;
+}
+
+.ratingWidget {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: row;
+  text-align: right;
+}
+.ratingWidget .feedback {
+  position: absolute;
+  top: 2em;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: 15% 70%;
+  z-index: 100;
+  width: 80vw;
+  height: 20em;
+  left: -55vw;
+  background-color: white;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.404);
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.feedback h3 {
+  width: 90%;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: left;
+  border-bottom: 1px solid #6f23d3;
+}
+.feedback span {
+  display: grid;
+  grid-auto-flow: column;
+}
+.ratingWidget .feedback textarea {
+  font-family: inherit;
+  background-color: white;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 95%;
+  font-size: inherit;
+  outline: transparent;
+}
+.feedback textarea:focus {
+  border-left: 0.5px solid #2a86ff;
+}
+.rate {
+  width: 40%;
+  margin-left: 0;
+  margin-right: 0;
+  display: grid;
+  grid-auto-flow: column;
+}
+.rateBtn {
+  width: 2em;
+  height: 2em;
+  background-color: transparent;
+}
+.rateBtn * {
+  font-size: 1.5em;
 }
 
 @media only screen and (max-width: 800px){

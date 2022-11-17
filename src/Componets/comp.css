@@ -15,7 +15,7 @@
     color: #8b33ff;
 }
 .confOrder .comment {
-    width: 100%;
+    width: 280%;
     outline: transparent;
     text-align: left;
     color: black;
@@ -207,9 +207,12 @@
     height: 3em;
     border-radius: 50%;
     position: absolute;
-    top: 10%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 30%;
     z-index: 500;
-    margin-left: calc((100vw - 3em)/2);
     background-color: transparent;
     border: 4px solid transparent;
     border-top: 4px solid #9E54FF;
@@ -224,12 +227,34 @@
     from{transform: rotate(0deg);}
     to{transform: rotate(360deg);}
 }
-
+.myOrderList {
+    margin-top: 5%;
+    display: grid;
+    grid-auto-flow: row;
+}
+.myOrder {
+    width: 90%;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-auto-flow: row;
+    text-align: left;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.247);
+}
+.myOrder .food {
+    min-height: 5em;
+}
+.myOrder .hor{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 60%;
+}
 /* button1 styling */
 .btn1 {
     min-width: 20em;
     width: 20vw;
-    height: 3em;
+    height: 2.5em;
     background-color: rgb(0, 0, 0);
     color: white;
     border-radius: 10px;

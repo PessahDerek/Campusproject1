@@ -22,9 +22,9 @@ const ConfirmOrders = () => {
     setOrderList(oList)
     let tot = 0
     oList.forEach(p=>{
-      tot+=p.food.price
+      console.log(p.cost)
+      tot+=p.cost
     })
-    console.log(oList[0])
     setTotal(tot)
   }, [oList])
 

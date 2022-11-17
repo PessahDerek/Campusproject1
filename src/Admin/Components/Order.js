@@ -13,7 +13,7 @@ const Order = (props) => {
         await axios.post(onApi+'/finduser', {userId: props.userId})
         .then(res=>{
           if(res.data.err){
-            // ignore
+            return
           }
           setCustomer(res.data.user)
         }, err=>setCustomer(p=>({...p, username: err.message})))
@@ -21,18 +21,28 @@ const Order = (props) => {
           // ignore
         })
       }
-      
-    })
+      getusers()
+    }, [])
   return (
     <div className='order'>
       <span>
         <h5>Table number: {props.tbNumber}</h5>
         <h5>Customer: {customer.username}</h5>
       </span>
-      {props.orders.map(order=><span key={order.id}>
-        <h6>{order.title}</h6>
-        <h6>{}</h6>
+      {props.orders.map(order=><span className='food'
+       key={order.id}>
+        <h4>{order.food}</h4>
+        <p>{order.comment}</p>
       </span>)}
+      <button className='simpleblack'>
+        Confirm
+      </button>
+      <button className='button1'>
+        Deny
+      </button>
+      <div className='reason'>
+
+      </div>
     </div>
   )
 }

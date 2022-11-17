@@ -17,32 +17,33 @@ const MenuLanding = () => {
     const [categories, setCategories] = useState([])
     const [tableNumber, setTbNumber] = useState("")
 
-    useEffect(()=>{
-        function setCategs(arr){
-            let array = categories
-            for (const elem of arr){
-                if (!(elem.category in array)){
-                    array.push(elem.category)
-                }
+    function setCategs(arr){
+        let array = categories
+        for (const elem of arr){
+            if (!(elem.category in array)){
+                array.push(elem.category)
             }
-            let realList = [...new Set(array)]
-            setCategories(realList)
         }
+        let realList = [...new Set(array)]
+        setCategories(realList)
+    }
 
-        async function getFoods(){
-            setSpin(true)
-            await axios.get(onApi+'/clientfoods')
-            .then(res=>{
-                setFoods(res.data);
-                setCategs(res.data)
-                setSpin(false)
-            }, err=>{
-                setSpin(false)
-            })
-            .catch(err=>{
-                setSpin(false)
-            })
-        }
+    async function getFoods(){
+        setSpin(true)
+        await axios.get(onApi+'/clientfoods')
+        .then(res=>{
+            setFoods(res.data);
+            setCategs(res.data)
+            setSpin(false)
+        }, err=>{
+            setSpin(false)
+        })
+        .catch(err=>{
+            setSpin(false)
+        })
+    }
+
+    useEffect(()=>{
         try {
             setTbNumber(JSON.parse(location.state).tableNumber)
             dispatch(setTableNumber(JSON.parse(location.state).tableNumber))
@@ -50,14 +51,19 @@ const MenuLanding = () => {
             //navigate('/')
         }
         getFoods()
-    }, [categories, dispatch])
+    }, [dispatch, location.state])
 
     if (foods.length < 1){
         return (
-            <>
-                <h3>No foods</h3>
+            <div className='errorDiv'>
+                <h1>No foods</h1>
                 {spin && <Spinner />} 
-            </>
+                <button className='button4'
+                    onClick={getFoods}
+                >
+                    Refresh
+                </button>
+            </div>
         )
     }
   return (

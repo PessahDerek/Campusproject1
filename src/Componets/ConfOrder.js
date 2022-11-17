@@ -10,8 +10,8 @@ const ConfOrder = (props) => {
   return (
     <div className='confOrder'>
       <span className='buttons'>
-        <h3>Food: {food.food.title}</h3>
-        <h4>Cost: ksh{food.food.price}</h4>
+        <h3>Food: {food.food}</h3>
+        <h4>Cost: ksh{food.cost}</h4>
       </span>
       <span>
         <p className='label'>Comment: .</p>
