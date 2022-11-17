@@ -14,7 +14,12 @@ const newOrder = new mongoose.Schema({
         required: true
     },
     customerTotal: {
-        type: Number
+        type: Number,
+        required: true
+    },
+    proccessed: {
+        type: Boolean,
+        default: false
     }
 })
 

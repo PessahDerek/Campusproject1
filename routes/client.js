@@ -1,5 +1,6 @@
 const client = require('express').Router();
 const customer = require('../models/customer');
+const Feedback = require('../models/Feedback');
 const foods = require('../models/food');
 const orders = require('../models/Orders');
 const tables = require('../models/tables');
@@ -82,6 +83,92 @@ client.post('/placeorder', async(req, res)=>{
     } catch (error) {
         res.send({err: true, message: error.message})
     }
+})
+
+client.post('/myorders', async(req, res)=>{
+    let myorders = await orders.find({customer: req.body.userId})
+    console.log(myorders)
+    if(myorders !== null){
+        return res.send({err: false, orders: myorders})
+    }
+    return res.send({err: true, message: "You don't have any orders"})
+})
+
+client.post('/customerfeedback', async(req, res)=>{
+    let findFood = await Feedback.find({food: req.body.foodId})
+    
+    async function update_food_rating(){
+        let getFoodRating = await Feedback.find({food: req.body.foodId})
+        await foods.findByIdAndUpdate(req.body.foodId, {rating: getFoodRating.rating})
+        .then(resp=>{
+            return res.send({err: false, message: "Thank you for your feedback"})
+        })
+        .catch(err=>{
+            console.log(err.message)
+            // should concern the admin
+        })
+    }
+    async function update(){
+        switch(req.body.stars){
+            case 1: {
+                await Feedback.updateOne({_id: req.body.foodId}, {$inc: {one: 1}, $push: {feedback: req.body.feedback}})
+                .then(resp=>{
+                    if (resp.acknowledged) return update_food_rating()
+                    return res.send({err: true, message: "Error recording feedback, try again later"})
+                })
+                break;
+            }
+            case 2: {
+                await Feedback.updateOne({_id: req.body.foodId}, {$inc: {two: 1}, $push: {feedback: req.body}})
+                .then(resp=>{
+                    if(resp.acknowledged) return update_food_rating()
+                    return res.send({err: true, message: "Error recording feedback, try again later"})
+                })
+                break;
+            }
+            case 3: {
+                await Feedback.updateOne({_id: req.body.foodId}, {$inc: {three: 1}, $push: {feedback: req.body.feedback}})
+                .then(resp=>{
+                    if(resp.acknowledged) return update_food_rating()
+                    return res.send({err: true, message: "Error recording feedback, try again later"})
+                })
+                break;
+            }
+            case 4: {
+                await Feedback.updateOne({_id: req.body.foodId}, {$inc: {four: 1}, $push: {feedback: req.body.feedback}})
+                .then(resp=>{
+                    if(resp.acknowledged) return update_food_rating()
+                    return res.send({err: true, message: "Error recording feedback, try again later"})
+                })
+                break;
+            }
+            case 5: {
+                await Feedback.updateOne({_id: req.body.foodId}, {$inc: {five: 1}, $push: {feedback: req.body.feedback}})
+                .then(resp=>{
+                    if(resp.acknowledged) return update_food_rating()
+                    return res.send({err: true, message: "Error recording feedback, try again later"})
+                })
+                break;
+            }
+        }
+    }
+    if (findFood === null){
+        let newFeedback = Feedback({
+            food: foodId
+        })
+        await newFeedback.save()
+        .then(resp=>{
+            console.log(resp)
+            update()
+        })
+        .catch(err=>{
+            return false
+        })
+    }else{
+        console.log("exists")
+        return update()
+    }
+
 })
 
 module.exports = client;

@@ -9,6 +9,8 @@ const Admin = require('../models/Admin');
 // define cloudinary
 const cloudinary = require('cloudinary').v2;
 const stream = require('stream');
+const Orders = require('../models/Orders');
+const customer = require('../models/customer');
 const dotenv = require('dotenv').config();
 
 adminserver.post('/admincreateaccount', async(req, res)=>{
@@ -168,5 +170,24 @@ adminserver.post('/editfood', async(req, res)=>{
         return res.send({err: false, message: "Edit Successfully"})
     } )
 })
+
+adminserver.post('/finduser', async(req, res)=>{
+    let user = await customer.findOne({_id: req.body.userId})
+    
+    if(user !== null){
+        return res.send({err: false, user: user})
+    }
+    return res.send({err: true, message: "No user"})
+})
+
+adminserver.get('/fetchorders', async(req, res)=>{
+    let orders = await Orders.find()
+    try {
+        res.send({err: false, orders: orders})
+    } catch (error) {
+        
+    }
+})
+
 
 module.exports = adminserver
