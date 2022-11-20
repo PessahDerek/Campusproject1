@@ -7,10 +7,18 @@ const TrayBtn = () => {
   const navigate = useNavigate()
   const [show, setShow] = useState(true)
   const tray = useSelector(state=>state.order_slice.order)
+  let path = () => window.location.pathname
+
+  // detect path change
+  window.addEventListener('popstate', ()=>{
+    if (path() === '/' || path().includes('admin') || path().includes("scan")){
+      return setShow(false)
+    }
+    return setShow(true)
+  })
 
   useEffect(()=>{
-    let path = window.location.pathname
-    if(path === '/'){
+    if(path() === '/'|| path().includes('admin') || path().includes("scan")){
       return setShow(false)
     }
   }, [])
@@ -19,7 +27,11 @@ const TrayBtn = () => {
     <>
     {show && 
     <button className='trayBtn'
-      onClick={()=>navigate('roasters/confirmorder')}
+      onClick={()=>{
+        if(path().includes('roasters/confirmorder'))return
+        console.log("Yy")
+        navigate('roasters/confirmorder')
+      }}
     >
         <h2>{tray.length}</h2>
     </button>}

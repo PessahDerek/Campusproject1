@@ -60,9 +60,12 @@ nav {
   background: url('./Images/notificationOutlineWhite.png') #FF9E0D;
 }
 .attention {
+  width: 0;
+  height: 0;
   position: absolute;
   z-index: 300;
   left: 0vw;
+  outline: 0.5px solid red
 }
 #attentionDetails {
   width: 80vw;
