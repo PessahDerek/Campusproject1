@@ -174,7 +174,6 @@ client.post('/customerfeedback', async(req, res)=>{
     }
 
     if (findFood === null){
-        console.log('then here')
         let newFeedback = Feedback({
             food: req.body.foodId
         })
@@ -189,7 +188,6 @@ client.post('/customerfeedback', async(req, res)=>{
             return false
         })
     }else{
-        console.log("exists")
         return update()
     }
 
