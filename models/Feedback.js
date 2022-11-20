@@ -30,12 +30,17 @@ let newFeedback = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        default: function (){
+        get: function (){
             let tot = ((1*this.one)+(2 * this.two) + (3 * this.three) + (4 * this.four) + (5 * this.five));
-            let R = this.one + this.two + this.three + this.four + this.five
-            return tot / R; 
+            let R = this.one + this.two + this.three + this.four + this.five;
+            if (isNaN(tot / R)){
+                console.log(tot/R)
+                return 0; 
+            } 
+            return tot / R
         }
     }
 })
+
 
 module.exports = mongoose.model('feedback', newFeedback);

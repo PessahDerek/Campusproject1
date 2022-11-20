@@ -11,12 +11,30 @@ module.exports = async function new_feedback(foodId){
     })
     await newFeedback.save()
     .then(res=>{
+        console.log(res)
         return true
     })
     .catch(err=>{
         return false
     })
 }
+
+module.exports = async function update_rate(foodId){
+    let food = await Feedback.findOne({food: foodId})
+    console.log("this feedback: ", food)
+    if(food === null) return false
+    let tot = ((1*food.one)+(2 * food.two) + (3 * food.three) + (4 * food.four) + (5 * food.five));
+    let R = food.one + food.two + food.three + food.four + food.five;
+
+    await Feedback.findOneAndUpdate({food: foodId}, {rating: tot/R})
+    .then(resp=>{
+        return true
+    })
+    .catch(err=>{
+        return false
+    });
+}
+
 module.exports = async function upload_image(image, func){
     let url;
     const callback = (err, resp) =>{
