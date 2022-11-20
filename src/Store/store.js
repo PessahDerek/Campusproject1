@@ -3,40 +3,6 @@ import axios from 'axios'
 
 let api = 'https://servymenu.herokuapp.com/api'
 
-const foodSlice = createSlice({
-  name: 'foods',
-  initialState: {foodList: [], categories: []},
-  reducers: {
-    getCategories(state, action){
-      let array = state.categories
-      for (const elem of state.foodList){
-          if (!(elem.category in array)){
-              array.push(elem.category)
-          }
-      }
-      let realList = [...new Set(array)]
-      state.categories = realList
-    },
-    fetchFoodList(state, action){
-      let list;
-      axios.get(api+'/clientfoods')
-      .then(res=>{
-        list = res.data
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-      for(let elem in list) state.foodList.push(elem)
-    },
-    getFood(state, action){
-      for(const elem in state.foodList){
-        if(elem._id === action.payload)return elem;
-      }
-    }
-
-
-  }
-})
 
 const orderSlice = createSlice({
   name: 'counter',
@@ -74,11 +40,10 @@ const orderSlice = createSlice({
 })
 
 export const { initialiseWidget, addFlavor, addToTray, remFromTray, remFromOrder, addPendingOrder, setTableNumber } = orderSlice.actions
-export const {fetchFoodList, getCategories} = foodSlice.actions
-let order_slice = orderSlice.reducer
-let food_slice = foodSlice.reducer
 
-const reducer = combineReducers({order_slice, food_slice})
+let order_slice = orderSlice.reducer
+
+const reducer = combineReducers({order_slice})
 const store = configureStore({reducer})
 
 export default store

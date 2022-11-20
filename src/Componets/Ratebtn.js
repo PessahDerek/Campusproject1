@@ -6,7 +6,9 @@ const Ratebtn = (props) => {
     
     useEffect(()=>{
         props.id <= props.tot ? setClicked(true) : setClicked(false)
+
     }, [props.id, props.tot])
+
     const style = {
         color: `${clicked ? "rgb(255, 217, 0)" : "#b4b4b4"}`
     }

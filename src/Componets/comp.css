@@ -138,6 +138,14 @@
     color: white;
     background: linear-gradient(135deg, black 10%, transparent);
 }
+#offer {
+    width: 98%;
+    height: 30vh;
+    object-fit: fill;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -5%;
+}
 .topFood img {
     width: 90%;
     height: 80%;
@@ -186,7 +194,7 @@
 }
 .dropDown .items {
     z-index: 200;
-    top: 4em;
+    top: 3em;
     width: 0vw;
     display: none;
     background-color: #9E54FF;
@@ -198,8 +206,10 @@
 .dropDown .items button {
     width: 100%;
     color: white;
+    height: 3em;
     font-size: 18px;
     background-color: transparent;
+    border-bottom: 0.5px solid white !important;
 }
 /* spinner styling */
 .spinner {

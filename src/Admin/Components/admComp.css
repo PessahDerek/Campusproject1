@@ -197,6 +197,9 @@
     margin-right: auto;
     color: white;
 }
+.button1:active {
+    background-color: #181B28;
+}
 
 /* admin nav styilng */
 .adminNav {

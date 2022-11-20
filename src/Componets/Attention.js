@@ -1,38 +1,68 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import {onApi} from '../Functions/Func1'
+import Spinner from './Spinner'
+import Popup from './Popup'
+import { useSelector } from 'react-redux'
 
 const Attention = () => {
   const [message, setMessage] = useState("")
   const [sent, setSent] = useState(false)
   const [clicked, setClicked] = useState(false)
+  const [errMsg, setErrMsg] = useState("")
+  const [spin, setSpin] = useState(false)
+  const tbNumber = useSelector(state=>state.order_slice.tableNumber)
 
-  const show = (e) =>{
-    let widget = document.querySelector(".attention .details")
-    if(clicked){
-      widget.style.left = "-80vw"
-      widget.style.opacity = '0'
-      e.target.style.background = "url('./Images/notificationOutlineWhite.png') #FF9E0D;"
-      return setClicked(false)
+  const sendRequest = async() =>{
+    if(!tbNumber)return setErrMsg("Scan table to proceed")
+    
+    setSpin(true)
+    let body = {
+      customer: localStorage.getItem('roastersUser'),
+      tableNumber: tbNumber,
+      message: message
     }
-    widget.style.left = '15vw'
-    widget.style.opacity = '1' 
-    e.target.style.background = "url('./Images/notificationOutlineWhite.png') #ff0d0d;"
-    setClicked(true)
+    await axios.post(onApi+'/custrequest', body)
+    .then(res=>{
+      if(res.data.err){
+        setSpin(false)
+        return setErrMsg(res.data.message)
+      }
+      setSpin(false)
+        setSent(res.data.sent)
+        setTimeout(() => {
+          return setClicked(false)
+        }, 1000);
+    }, err=>{
+      setSpin(false)
+      setErrMsg(err.message)
+    })
   }
 
+  const style = {
+    left: `${clicked? '10vw' : '-90vw'}`,
+    opacity: `${clicked ? '1' : '0'}`,
+    top: `${clicked ? '30vh' : '10vh'}`
+
+  }
   return (
     <div className='attention'>
+      {spin && <Spinner />}
+      {errMsg  && <Popup message={errMsg} dismiss={setErrMsg} />}
       <button className='trayBtn' 
-        onClick={show}
+        onClick={()=>setClicked(!clicked)}
       />
-      <div className='details'>
-        <h3>Request for attendant</h3>
+      <div id='attentionDetails' style={style} onBlur={()=>setClicked(false)}>
+        <h2>Request for attendant</h2>
         <textarea 
           placeholder='Write any message you have here'
           value={message}
           onChange={e=>setMessage(e.target.value)}
         />
-        <button className='button1'>
-          {sent ? 'Waiting' : 'Request'}
+        <button className='button1'
+          onClick={sendRequest}
+        >
+          {sent ? 'Waiting' : 'Send request'}
         </button>
       </div>
     </div>

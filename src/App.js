@@ -13,6 +13,8 @@ import Attention from './Componets/Attention';
 import QRScanpage from './Pages/QRScanpage';
 import MobileLanding from './Pages/MobileLanding';
 import ViewOrders from './Pages/ViewOrders';
+import MyAccount from './Pages/MyAccount';
+import RateUs from './Pages/RateUs';
 
 function App() {
   return (
@@ -26,9 +28,11 @@ function App() {
         <Route exact path='/print' element={<Printpage />} />
         <Route exact path='/roasters/*' element={<MenuLanding />} />
         <Route exact path='/roasters/viewcategory' element={<CategoryList />} />
-        <Route exact path='/roasters/setuporder' element={<ConfigureOrder />} />
+        {/* <Route exact path='/roasters/setuporder' element={<ConfigureOrder />} /> */}
         <Route exact path='/roasters/confirmorder' element={<ConfirmOrders />} />
         <Route exact path='/yourorders' element={<ViewOrders />} />
+        <Route exact path='/myaccount' element={<MyAccount />} />
+        <Route exact path='/rateus' element={<RateUs />} />
       </Routes>
     </div>
   );

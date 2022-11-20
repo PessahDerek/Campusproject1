@@ -23,7 +23,7 @@ const Dropdown = (props) => {
           b1.width = "90%";
           b2.width = "50%";
           b3.width = "10%";
-          items.width = "60vw";
+          items.width = "80vw";
           items.display = 'grid';
         }
         setClicked(!clicked)

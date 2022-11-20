@@ -26,7 +26,6 @@ const SelectFood = (props) => {
             added.current = false
             return dispatch(remFromTray(food._id))
         }
-        console.log("x")
         added.current = true
         widg.style.top = '50%'
         widg.style.opacity = '0'

@@ -52,6 +52,9 @@ nav {
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
+.trayBtn:active {
+  background-color: #be770c;
+}
 .attention .trayBtn{
   top: 30%;
   background: url('./Images/notificationOutlineWhite.png') #FF9E0D;
@@ -59,18 +62,22 @@ nav {
 .attention {
   position: absolute;
   z-index: 300;
-  top: 30vh;
   left: 0vw;
 }
-.attention .details {
-  margin-left: -100vw;
+#attentionDetails {
   width: 80vw;
-  opacity: 0;
+  opacity: 1 !important;
   display: grid;
   grid-auto-flow: row;
   text-align: left;
   row-gap: 4%;
-  transition: left 0.5s, opacity 1s;
+  transition: left 0.5s, opacity 1s, top 0.5s;
+  background-color: white;
+  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.336);
+  padding-bottom: 8%;
+}
+#attentionDetails h3{
+  margin-left: 4%;
 }
 .attention textarea {
   height: 10em;

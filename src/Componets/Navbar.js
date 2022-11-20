@@ -9,8 +9,8 @@ const Navbar = () => {
         <h1>Roaster's Digital Menu</h1>
         <Dropdown 
           buttons={[
-            {text: "My Account", path: ""},
-            {text: "Settings", path: ""},
+            {text: "My Account", path: "/myaccount"},
+            {text: "Rate Us", path: "/rateus"},
           ]}
         />
     </nav>

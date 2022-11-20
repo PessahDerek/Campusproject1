@@ -2,49 +2,62 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { onApi } from '../Functions/Func1'
 import Ratebtn from './Ratebtn'
+import Spinner from './Spinner'
 
 const Rate = (props) => {
     const [show, setShow] = useState(false)
     const [total, setTotal] = useState(0)
+    const [spin, setSpin] = useState(false)
     const [rate, setRate] = useState({
         foodId: props.id,
-        stars: "",
+        stars: 0,
         feedback: ""
     })
     const setClick = (val) =>{
         setTotal(val)
-        setRate(p=>({...p, stars: total}))
+        setRate(p=>({...p, stars: val}))
         return total
     }
 
     const sendFeedBack = async() =>{
+        setSpin(true)
         await axios.post(onApi+'/customerfeedback', rate)
         .then(res=>{
             if(res.data.err){
+                setSpin(false)
                 return alert(res.data.message)
             }
+            setSpin(false)
             alert(res.data.message)
+        }, err=>{
+            alert(err.message)
+            setSpin(false)
+        })
+        .catch(err=>{
+            setSpin(false)
+
         })
         setShow(false)
     }
 
   return (
     <div className='ratingWidget'>
+        {spin && <Spinner />}
       <div className='rate' onClick={()=>setShow(!show)}>
         <Ratebtn id={1} isTrue={setClick} tot={total} 
-            show={setShow}
+            show={setShow} setRate={setRate}
         />
         <Ratebtn id={2} isTrue={setClick} tot={total} 
-            show={setShow}
+            show={setShow} setRate={setRate}
         />
         <Ratebtn id={3} isTrue={setClick} tot={total} 
-            show={setShow}
+            show={setShow} setRate={setRate}
         />
         <Ratebtn id={4} isTrue={setClick} tot={total} 
-            show={setShow}
+            show={setShow} setRate={setRate}
         />
         <Ratebtn id={5} isTrue={setClick} tot={total} 
-            show={setShow}
+            show={setShow} setRate={setRate}
         />
       </div>
       {show &&

@@ -7,6 +7,8 @@ import Spinner from '../Componets/Spinner'
 import TopDeal from '../Componets/TopDeal'
 import { generateId, onApi } from '../Functions/Func1'
 import { setTableNumber } from '../Store/store'
+import Navbar from '../Componets/Navbar'
+import offer from '../Images/chickonoffer.jpeg'
 
 const MenuLanding = () => {
     let dispatch = useDispatch()
@@ -15,7 +17,6 @@ const MenuLanding = () => {
     const [spin, setSpin] = useState(false)
     const [foods, setFoods] = useState([])
     const [categories, setCategories] = useState([])
-    const [tableNumber, setTbNumber] = useState("")
 
     function setCategs(arr){
         let array = categories
@@ -45,10 +46,9 @@ const MenuLanding = () => {
 
     useEffect(()=>{
         try {
-            setTbNumber(JSON.parse(location.state).tableNumber)
             dispatch(setTableNumber(JSON.parse(location.state).tableNumber))
         } catch (error) {
-            //navigate('/')
+            navigate('/')
         }
         getFoods()
     }, [dispatch, location.state])
@@ -69,9 +69,11 @@ const MenuLanding = () => {
   return (
     <div className='menuLanding'>
         {spin && <Spinner />}
-        <TopDeal 
+        {/* <TopDeal 
             food={foods[2]}
-        />
+        /> */}
+        <Navbar />
+        <img src={offer} alt='offer' id="offer" />
         {categories.length < 1 && <h3>Loading...</h3>}
         <div className='categList'>
             {categories.map(categ=><Category 

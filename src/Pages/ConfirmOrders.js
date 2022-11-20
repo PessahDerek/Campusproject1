@@ -16,6 +16,7 @@ const ConfirmOrders = () => {
   const [spin, setSpin] = useState(false)
   const [message, setMessage] = useState("")
   let oList = useSelector(state=>state.order_slice.order)
+  const tbNumber = useSelector(state=>state.order_slice.tableNumber)
   const [total, setTotal] = useState(0)
 
   useEffect(()=>{
@@ -36,14 +37,16 @@ const ConfirmOrders = () => {
 
     let sendObject = {
       userId: userId,
-      tableNumber: "",
-      orders: orderList
+      tableNumber: tbNumber,
+      orders: orderList,
+      cost: total
     }
     setSpin(true)
 
     await axios.post(onApi+'/placeorder', sendObject)
     .then(res=>{
       if(res.data.err){
+        setSpin(false)
         return setMessage(res.data.message)
       }
       dispatch(addPendingOrder(res.data.orderId))

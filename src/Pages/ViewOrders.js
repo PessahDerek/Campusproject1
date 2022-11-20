@@ -14,14 +14,14 @@ const ViewOrders = () => {
       await axios.post(onApi+'/myorders', {userId: userId})
       .then(res=>{
         if(res.data.err){
-          return
+          return setMessage(res.data.message)
         }
         setOrder(res.data.orders)
       }, err=>{
         setMessage(err.message)
       })
     } catch (error) {
-      
+      setMessage(error.message)
     }
     
   }
