@@ -2,7 +2,7 @@ const cloudinary = require('cloudinary').v2;
 const stream = require('stream');
 const dotenv = require('dotenv').config();
 const qr = require('qrcode');
-const Feedback = require('../models/Feedback');
+const Feedback = require('../models/FoodFeedback');
 
 
 module.exports = async function new_feedback(foodId){
