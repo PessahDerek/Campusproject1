@@ -21,7 +21,7 @@ const Rate = (props) => {
 
     const sendFeedBack = async() =>{
         setSpin(true)
-        await axios.post(onApi+'/customerfeedback', rate)
+        await axios.post(onApi+'/foodfeedback', rate)
         .then(res=>{
             if(res.data.err){
                 setSpin(false)

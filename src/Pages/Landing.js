@@ -3,6 +3,7 @@ import MobileLanding from './MobileLanding'
 import Userlogin from './Userlogin'
 import logo from '../Images/logo.png'
 import { useNavigate } from 'react-router-dom'
+import MenuLanding from './MenuLanding'
 
 const Landing = () => {
   const navigate = useNavigate()
@@ -27,7 +28,7 @@ const Landing = () => {
     }, [])
 
     if (win < 800 || isMobile){
-      if(isUser)return <MobileLanding />
+      if(isUser)return <MenuLanding /> //<MobileLanding />
       return <Userlogin 
         isUser={isUser}
         setUser={setIsUser}

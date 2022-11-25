@@ -11,16 +11,17 @@ const TrayBtn = () => {
 
   // detect path change
   window.addEventListener('popstate', ()=>{
-    if (path() === '/' || path().includes('admin') || path().includes("scan")){
+    if (path() !== '/' || path().includes('admin') || path().includes("scan")){
       return setShow(false)
     }
     return setShow(true)
   })
 
   useEffect(()=>{
-    if(path() === '/'|| path().includes('admin') || path().includes("scan")){
+    if(path() !== '/'|| path().includes('admin') || path().includes("scan")){
       return setShow(false)
     }
+    setShow(true)
   }, [])
     
   return (
@@ -29,7 +30,6 @@ const TrayBtn = () => {
     <button className='trayBtn'
       onClick={()=>{
         if(path().includes('roasters/confirmorder'))return
-        console.log("Yy")
         navigate('roasters/confirmorder')
       }}
     >

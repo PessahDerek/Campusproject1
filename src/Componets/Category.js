@@ -8,6 +8,7 @@ const Category = (props) => {
     const navigate = useNavigate()
 
     const goToCateg = () =>{
+      console.log("hello")
         navigate('viewcategory', {state: {foods: foods}})
     }
   return (

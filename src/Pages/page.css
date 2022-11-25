@@ -1,4 +1,31 @@
- 
+ /* rateusPage styling */
+.rateUsPage {
+    min-height: 100vh;
+}
+.rateUsPage form {
+    width: 98%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 4%;
+}
+.rateUsPage form textarea {
+    width: calc(90% - 1px);
+    height: 10em;
+    font-family: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    outline: 0.5px solid #4b00ad;
+}
+/* vieworderspage */
+.viewOrdersPage .myOrderList{
+    width: 100%;
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 2%;
+}
 /* view tray/confirm order page */
 .confirmOrderPage {
     min-height: 100vh;
@@ -13,7 +40,8 @@
 .confirmOrderPage #orderBtn {
     position: fixed;
     bottom: 5px;
-    left: 1%;
+    left: 0;
+    right: 0;
     z-index: 500;
     box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.473);
 }

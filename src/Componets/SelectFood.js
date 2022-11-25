@@ -7,6 +7,7 @@ import './comp.css'
 import TrayBtn from './TrayBtn'
 
 const SelectFood = (props) => {
+    let rating = ["⭐", "⭐","⭐","⭐","⭐"]
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const added = useRef(false)
@@ -65,7 +66,11 @@ const SelectFood = (props) => {
     <div className='selectFood'>
         <img src={food.image} alt='food' />
         <div className='details'>
-            <h3>{food.title} </h3>
+            <span>
+              <h3>{food.title} </h3>  
+              {food.rating ? rating.splice(0, food.rating): "Not rated yet"}
+            </span>
+            
             <article>
                 <p>{food.description}</p>
             </article>

@@ -17,6 +17,7 @@ import MyAccount from './Pages/MyAccount';
 import RateUs from './Pages/RateUs';
 
 function App() {
+  
   return (
     <div className="App">
       <TrayBtn />
@@ -27,7 +28,8 @@ function App() {
         <Route exact path='/admin/*' element={<Admindash />} />
         <Route exact path='/print' element={<Printpage />} />
         <Route exact path='/roasters/*' element={<MenuLanding />} />
-        <Route exact path='/roasters/viewcategory' element={<CategoryList />} />
+        {/* add roasters before viewcategory */}
+        <Route exact path='/viewcategory' element={<CategoryList />} />
         {/* <Route exact path='/roasters/setuporder' element={<ConfigureOrder />} /> */}
         <Route exact path='/roasters/confirmorder' element={<ConfirmOrders />} />
         <Route exact path='/yourorders' element={<ViewOrders />} />
