@@ -42,6 +42,7 @@ let newFeedback = new mongoose.Schema({
     }
 })
 
+
 newFeedback.pre('findOneAndUpdate', async(docs, err)=>{
     let total = ((1*docs.one)+(2 * docs.two) + (3 * docs.three) + (4 * docs.four) + (5 * docs.five));
     let R = docs.one + docs.two + docs.three + docs.four + docs.five

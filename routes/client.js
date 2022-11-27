@@ -74,7 +74,6 @@ client.post('/placeorder', async(req, res)=>{
             })
             
         }, err=>{
-            console.log(Object.keys(err))
             console.log('minor err: ', err.message)
             return res.send({err: true, message: "Order Could not be sent, We'll send a waiter"})
         })
@@ -116,6 +115,10 @@ client.post('/customerfeedback', async(req, res)=>{
 client.post('/foodfeedback', async(req, res)=>{
     let findFood = await foodFeed.findOne({food: req.body.foodId})
     
+    const updateComment = () =>{
+        if (req.body.feedback.length < 1) return {}
+        return {feedback: req.body.feedback}
+    }
     async function update_food_rating(){
         
         let x = await update_rate(req.body.foodId)
@@ -130,10 +133,9 @@ client.post('/foodfeedback', async(req, res)=>{
         })
     }
     async function update(){
-        console.log('on update', req.body.stars)
         switch(req.body.stars){
             case 1: {
-                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {one: 1}, $push: {foodFeed: req.body.foodFeed}}, (err, docs)=>{
+                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {one: 1}, $push: updateComment()}, (err, docs)=>{
                     if(err){
                         return res.send({err: true, message: "Error recording foodFeed, try again later"})
                     }
@@ -142,7 +144,7 @@ client.post('/foodfeedback', async(req, res)=>{
                 break;
             }
             case 2: {
-                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {two: 1}, $push: {foodFeed: req.body}}, (err, docs)=>{
+                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {two: 1}, $push: updateComment()}, (err, docs)=>{
                     if(err){
                         return res.send({err: true, message: "Error recording foodFeed, try again later"})
                     }
@@ -151,7 +153,7 @@ client.post('/foodfeedback', async(req, res)=>{
                 break;
             }
             case 3: {
-                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {three: 1}, $push: {foodFeed: req.body.foodFeed}}, (err, docs)=>{
+                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {three: 1}, $push: updateComment()}, (err, docs)=>{
                     if(err){
                         return res.send({err: true, message: "Error recording foodFeed, try again later"})
                     }
@@ -160,7 +162,7 @@ client.post('/foodfeedback', async(req, res)=>{
                 break;
             }
             case 4: {
-                await foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {four: 1}, $push: {foodFeed: req.body.foodFeed}})
+                await foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {four: 1}, $push: updateComment()})
                 .then(resp=>{
                     return update_food_rating()
                 }, err=>console.log("is minor: ", err.message))
@@ -170,8 +172,9 @@ client.post('/foodfeedback', async(req, res)=>{
                 break;
             }
             case 5: {
-                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {five: 1}, $push: {foodFeed: req.body.foodFeed}}, (err, docs)=>{
+                foodFeed.findOneAndUpdate({food: req.body.foodId}, {$inc: {five: 1}, $push: updateComment()}, (err, docs)=>{
                     if(err){
+                        console.log(err)
                         return res.send({err: true, message: "Error recording foodFeed, try again later"})
                     }
                     return update_food_rating()

@@ -17,7 +17,7 @@ const newOrder = new mongoose.Schema({
         type: Number,
         required: true
     },
-    proccessed: {
+    processed: {
         type: Boolean,
         default: false
     }

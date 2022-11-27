@@ -5,6 +5,8 @@ const generateQRcode = require('../functions/func1');
 const food = require('../models/food');
 const tables = require('../models/tables');
 const Admin = require('../models/Admin');
+const FoodFeedback = require('../models/FoodFeedback');
+const Feedback = require('../models/Feedback')
 
 // define cloudinary
 const cloudinary = require('cloudinary').v2;
@@ -18,11 +20,12 @@ adminserver.post('/admincreateaccount', async(req, res)=>{
         let newUser = new Admin({
             userName: req.body.username,
             phone: req.body.phone,
-            password: req.body.password
+            password: req.body.password,
+            accessRight: req.body.isManager
         })
         await newUser.save()
         .then(resp=>{
-            return res.send({err: false, adminId: resp._id})
+            return res.send({err: false, adminId: resp._id, isManager: resp.accessRight})
         }, err=>{
             return res.send({err: true, message: err.message})
         })
@@ -189,5 +192,29 @@ adminserver.get('/fetchorders', async(req, res)=>{
     }
 })
 
+adminserver.post('/processorder', async(req, res)=>{
+    await Orders.findByIdAndUpdate(req.body.orderId, { processed: true })
+    .then(resp=>{
+        res.send({err: false})
+    }, ()=>{
+        res.send({err: true, message: "Error Occured"})
+    })
+    .catch(()=>{
+        res.send({err: true, message: "Error Occured"})
+    })
+})
+
+adminserver.get('/fetchfeedback', async(req, res)=>{
+    try {
+        let foodFeedBack = await FoodFeedback.find()
+        let feedBack = await Feedback.find()
+        console.log(feedBack)
+        return res.send({err: false, foodFeedBack: foodFeedBack, feedBack: feedBack})
+    } catch (error) {
+        console.log(error)
+    }
+    
+
+})
 
 module.exports = adminserver
