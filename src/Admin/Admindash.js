@@ -7,6 +7,7 @@ import MenuPage from './Components/MenuPage'
 import SetupRestaurant from './Components/SetupRestaurant'
 import OrdersPage from './Components/OrdersPage'
 import Printpage from './Components/Printpage'
+import Analytics from './Components/Analytics'
 
 const Admindash = () => {
   const [isLoggedin, setIsloggedin] = useState("")
@@ -32,6 +33,7 @@ const Admindash = () => {
         <Route path='/*' element={<OrdersPage />} />
         <Route path='/menu' element={<MenuPage />} />
         <Route path='/setuprestaurant/*' element={<SetupRestaurant />} />
+        <Route path='/analytics/*' element=<Analytics /> />
         <Route path='print' element={<Printpage />} />
       </Routes>
     </div>

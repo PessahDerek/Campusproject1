@@ -1,3 +1,185 @@
+/* analytics styling page */
+.analyticsPage {
+    width: calc(100vw - 5.05em);
+    margin-left: auto;
+    display: grid;
+    grid-auto-flow: row;
+    padding-bottom: 5%;
+}
+.analyticsPage .generalFoodStatistics .analyticsNav {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: white;
+    font-size: 22px;
+    margin-bottom: 2%;
+    text-align: left;
+    text-indent: 3%;
+    position: sticky;
+    top: 0;
+}
+.feedbackStats {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 4%;
+    box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.226);
+}
+.feedbackStats article {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 25% 75%;
+}
+.feedbackStats article section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 1%;
+}
+
+.feedbackStats article section:nth-child(2) div{    
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.151);
+}
+.feedbackStats .generalFeedback{
+    display: flex !important;
+    grid-auto-flow: unset;
+    grid-template-columns: none;
+}
+.feedbackStats article section button {
+    margin: 5px;
+}
+.generalFoodStatistics{
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 2%;
+    padding-bottom: 4%;
+}
+.analyticsPage .nav {
+    min-height: 100vh;
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: 3.39em;
+    background-color: white;
+    box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.226);
+}
+.foodRatingGraph {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 50% 50%;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.13);
+}
+.foodRatingGraph .x {
+
+}
+.foodRatingGraph .header {
+    display: grid;
+    grid-auto-flow: column;
+}
+.foodRatingGraph .x span {
+    display: grid;
+    grid-auto-flow: column;
+    background-color: #9E54FF;
+}
+.foodRatingGraph .x span label {
+    background-color: #c9a0ff;
+}
+.foodRatingGraph .x input {
+    width: 90%;
+    height: 2.5em;
+    background-color: white;
+    color: #181B28;
+    outline: transparent;
+    border-bottom: 2px solid black;
+}
+
+.foodRatingGraph .foodRating {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: 10%;
+}
+.foodRating span {
+    width: 100%;
+    height: 2.5em;
+    line-height: 2.5em;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 40%;
+}
+.foodRating span label {
+    text-align: right;
+    padding-right: 2%;
+}
+.foodRating span div {
+    width: 100%;
+    height: 1.5em;
+    line-height: 1.5em;
+    margin-top: auto;
+    margin-bottom: auto;
+    background: linear-gradient(90deg, red 1, blue 0);
+}
+.graph {
+    height: 20em;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 15%;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.13);
+    border-radius: 10px;
+}
+.graph .y {
+    width: 100%;
+    margin-right: auto;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: 10% 80%;
+    column-gap: 1%;
+}
+.graph .y .bars {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+}
+.graph label {
+    font-weight: bolder;
+}
+
+/* graphbar styling */
+.graphBar {
+    margin-top: auto;
+    height: 98%;
+    width: 2em;
+    display: grid;
+    background-color: rgb(206, 206, 206);
+}
+.graphBar div {
+    width: 100%;
+    height: 5%;
+    background-color: rgb(253, 69, 2);
+    margin-top: auto;
+    transition: height 1.5s, background-color 2s;
+}
+.graphBar p {
+    height: 1em;
+    width: 200px;
+    height: 1em;
+    font-size: 0.8em;
+    position: absolute;
+    margin-top: 650%;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    transform-origin: 6%;
+    text-align: center;
+    transform: rotateZ(-90deg);
+}
+
+
+
 /* printpage */
 #displayQRs {
     display: flex;
@@ -54,7 +236,7 @@
     object-fit: contain;
 }
 /* order widget styling */
-.order{
+.order, .processed{
     width: 20em;
     display: grid;
     margin: 1%;
@@ -62,21 +244,36 @@
     padding-bottom: 4%;
     gap: 2%;
     text-align: left;
+    background-color: white;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.144);
 }
-.order span {
+.order span{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
     display: grid;
     grid-auto-flow: column;
 }
-.order .food {
+.processed span {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    grid-auto-flow: row;
+}
+.processed {
+    height: 10em;
+    box-shadow: none;
+    background-color: #181B28;
+    color: white;
+    width: 12em !important;
+}
+.order .food, .processed .food {
     grid-auto-flow: row;
 }
 /* order page styling */
 .ordersPage {
     width: calc(100vw - 6em);
+    height: 90vh;
     margin-left: 6em;
     margin-top: 1%;
     display: grid;
@@ -92,6 +289,17 @@
     position: sticky;
     top: 0;
     border-bottom: 0.5px solid #9E54FF;
+}
+.ordersPage .ordersList {
+    width: 100%;
+    height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.ordersPage .ordersList::-webkit-scrollbar-track {
+    background-color: #181B28;
+    width: 20px;
 }
 
 /* viewtable widget */
@@ -173,7 +381,7 @@
     grid-auto-rows: 3em;
 }
 .inp1 {
-    width: 97.5%;
+    width: 80%;
     height: 2.5em;
     color: black;
     padding-left: 2%;
@@ -184,6 +392,7 @@
     border: none;
     transition: border-radius 0.5s;
 }
+
 .inp1:focus {
     /* border-radius: 5px; */
     outline: 2px solid rgba(137, 43, 226, 0.486);

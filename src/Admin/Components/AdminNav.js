@@ -53,7 +53,9 @@ const AdminNav = (props) => {
               ()=>toPath('/tables')
             }>Tables</button>
 
-            <button>Analytics</button>
+            <button onClick={
+              ()=>toPath('/analytics')
+            }>Analytics</button>
 
             <button>Settings</button>
         </div>

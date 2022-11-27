@@ -68,7 +68,7 @@ const SelectFood = (props) => {
         <div className='details'>
             <span>
               <h3>{food.title} </h3>  
-              {food.rating ? rating.splice(0, food.rating): "Not rated yet"}
+              <p>{food.rating ? rating.splice(0, food.rating): "Not rated yet"}</p>
             </span>
             
             <article>

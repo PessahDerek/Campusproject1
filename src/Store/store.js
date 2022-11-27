@@ -1,8 +1,27 @@
 import { combineReducers, configureStore, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { onApi } from '../Functions/Func1'
 
-let api = 'https://servymenu.herokuapp.com/api'
+//let api = 'https://servymenu.herokuapp.com/api'
+let api = 'http://localhost:4000/api'
 
+
+const adminSlice = createSlice({
+  name: 'admin', 
+  initialState: {orders: [], foods: [], feedbacks: [], foodFeedBack: []},
+  reducers: {
+    get_Orders(state, action){
+      state.orders = [...new Set(action.payload)]
+    },
+    get_foods(state, action){
+      state.foods = [...new Set(action.payload)]
+    },
+    get_feedbacks(state, action){
+      state.feedbacks = [...new Set(action.payload[0])]
+      state.foodFeedBack = [...new Set(action.payload[1])]
+    }
+  }
+})
 
 const orderSlice = createSlice({
   name: 'counter',
@@ -41,9 +60,13 @@ const orderSlice = createSlice({
 
 export const { initialiseWidget, addFlavor, addToTray, remFromTray, remFromOrder, addPendingOrder, setTableNumber } = orderSlice.actions
 
-let order_slice = orderSlice.reducer
+export const { get_Orders, get_foods, get_feedbacks } = adminSlice.actions
 
-const reducer = combineReducers({order_slice})
+let order_slice = orderSlice.reducer
+let admin = adminSlice.reducer
+
+const reducer = combineReducers({order_slice, admin})
+
 const store = configureStore({reducer})
 
 export default store

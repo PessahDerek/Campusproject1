@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import AddFlavor from "../Admin/Components/AddFlavor";
 import AddPrice from "../Admin/Components/AddPrice";
 
@@ -54,7 +55,29 @@ export function purgeInputs(flav, size, quant, clicked){
 }
 
 export async function getFoods(){
-    // pass
+    let foods = []
+    return new Promise((resolve, reject)=>{
+        axios.get(onApi+'/clientfoods')
+        .then(res=>{
+            foods = [...new Set(res.data)]
+            return resolve(foods) 
+        })
+    })  
+}
+
+export function fetch_orders(){
+    return new Promise((resolve, reject) =>{
+        axios.get(onApi+'/fetchorders')
+        .then(res=>{
+            if(res.data.err){
+                return alert(res.data.message)
+            }
+            return resolve(res.data.orders)
+        })
+        .catch(err=>{
+            return reject(err.message)
+        })
+    })
 }
 
 export async function add_tables(data){
@@ -66,6 +89,18 @@ export async function add_tables(data){
     })
     .catch(err=>{
         return {err: true, message: err.message}
+    })
+}
+
+export async function getFeedBacks(){
+    return new Promise((resolve, reject)=>{
+        axios.get(onApi+'/fetchfeedback')
+        .then(res=>{
+            return resolve(res.data) 
+        })
+        .catch(err=>{
+            return reject(err) 
+        })
     })
 }
 
@@ -105,4 +140,4 @@ export function reducer(state, payload){
 }
 
 
-export default (onApi, generateId, getWidget, addFoodToMenu, add_tables, getTables, reducer, purgeInputs)
+export default (onApi, generateId, getWidget, addFoodToMenu, add_tables, getTables, reducer, purgeInputs, fetch_orders, getFeedBacks)
