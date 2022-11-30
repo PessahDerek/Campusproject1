@@ -27,12 +27,23 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
 // connect to mongodb
-mongoose.connect(process.env.DB, (err)=>{
-    if (err) console.log("Error Occured: ", err.message);
-    else{
-        console.log("Db Connection Successul");
-    }
-}) 
+
+function connect_db(){
+    mongoose.connect(process.env.DB, (err)=>{
+        if (err){
+            let timeout = 5000
+            console.log("Error Occured: ", err.message)
+            
+            setTimeout(() => {
+                connect_db()
+            }, timeout);
+        }else{
+            console.log("Db Connection Successul");
+        }
+    }) 
+}
+connect_db()
+ 
 
 // connect to server 
 app.listen(process.env.PORT, (err)=>{

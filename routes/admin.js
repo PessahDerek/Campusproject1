@@ -13,6 +13,7 @@ const cloudinary = require('cloudinary').v2;
 const stream = require('stream');
 const Orders = require('../models/Orders');
 const customer = require('../models/customer');
+const Request = require('../models/Request');
 const dotenv = require('dotenv').config();
 
 adminserver.post('/admincreateaccount', async(req, res)=>{
@@ -214,7 +215,26 @@ adminserver.get('/fetchfeedback', async(req, res)=>{
         console.log(error)
     }
     
+})
 
+adminserver.get('/fetchrequests', async(req, res)=>{
+    try {
+        let requests = await Request.find()
+        return res.send({err: false, requests: requests})
+    } catch (error) {
+        
+    }
+})
+
+adminserver.post('/answerrequest', async(req, res)=>{
+    try {
+        await Request.findByIdAndUpdate(req.body.id, {customerSorted: true})
+        .then(res=>{
+            console.log("done")
+        })
+    } catch (error) {
+        
+    }
 })
 
 module.exports = adminserver

@@ -20,6 +20,9 @@ const newOrder = new mongoose.Schema({
     processed: {
         type: Boolean,
         default: false
+    },
+    reason: {
+        type: String
     }
 })
 
