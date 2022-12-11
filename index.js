@@ -20,9 +20,9 @@ cloudinary.config({
 })
 
 // set up middleware
+app.use(cors());
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
-app.use(cors());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
