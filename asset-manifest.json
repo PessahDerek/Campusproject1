@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6379ccd0.css",
+    "main.js": "/static/js/main.c8764d32.js",
+    "static/js/684.005ced03.chunk.js": "/static/js/684.005ced03.chunk.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/4223371.jpg": "/static/media/4223371.47d82cb4d3a327726899.jpg",
+    "static/media/chickonoffer.jpeg": "/static/media/chickonoffer.62850fdac05fbc5cf4c0.jpeg",
+    "static/media/Icon1.png": "/static/media/Icon1.e661e875beb145bdd1f2.png",
+    "service-worker.js": "/service-worker.js",
+    "static/media/riesling.ttf": "/static/media/riesling.664ca03c2c61dbc61037.ttf",
+    "static/media/Aaargh.ttf": "/static/media/Aaargh.3e5f9b2128ca1ff0602c.ttf",
+    "index.html": "/index.html",
+    "static/media/Path 3.svg": "/static/media/Path 3.8ff7e1dade5e3479fdce.svg",
+    "static/media/Path 2.svg": "/static/media/Path 2.906da9f331640d3254af.svg",
+    "main.6379ccd0.css.map": "/static/css/main.6379ccd0.css.map",
+    "main.c8764d32.js.map": "/static/js/main.c8764d32.js.map",
+    "684.005ced03.chunk.js.map": "/static/js/684.005ced03.chunk.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6379ccd0.css",
+    "static/js/main.c8764d32.js"
+  ]
+}
