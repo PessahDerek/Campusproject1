@@ -1,6 +1,11 @@
 
-const cors = require('cors')
-//cors();
+const cors = require('cors');
+
+app.use(cors({
+    origin: '*',
+    credentials: true
+}));
+
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
@@ -20,9 +25,7 @@ cloudinary.config({
 })
 
 // set up middleware
-app.use(cors({
-    credentials: true
-}));
+
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended: true}))
