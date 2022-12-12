@@ -1,5 +1,6 @@
 
 const cors = require('cors');
+const app = express();
 
 app.use(cors({
     origin: '*',
@@ -9,7 +10,6 @@ app.use(cors({
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const parser = require('body-parser');
 const admApi = require('./routes/admin');
