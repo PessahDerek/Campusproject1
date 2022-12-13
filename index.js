@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 
 app.use(cors({
-    origin: '*',
+    origin: 'http://localhost' || 'https://roasters.netlify.app',
     credentials: true
 }));
 
